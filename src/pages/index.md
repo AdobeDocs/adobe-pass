@@ -1,30 +1,22 @@
 ---
-title: Overview - Cat Analytics
-description: This is the overview page of Cat Analytics
-contributors:
-  - https://github.com/icaraps 
+title: Overview - Adobe Pass Authentication
+description: This is the overview page of Adobe Pass Authentication
+#contributors:
+#  - https://github.com/orgs/AdobeDocs/teams/adobe-pass-authentication
 ---
 
 <Hero slots="heading, text"/>
 
-# Cat Analytics API
+# Adobe Pass Authentication
 
-Cat Product API offers limitless ways to integrate your most important customer data into key business processes. Cat Product API offer limitless ways.
+Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining 
+whether someone who requests access to a resource is entitled to it.
 
 <Resources slots="heading, links"/>
 
-#### Resources
-
-* [Quickstart Guide](https://developer.adobe.com)
-* [Cat Analytics Github Repo](https://github.com/AdobeDocs/dev-site)
-
 ## Overview
 
-This documentation provides instructions for Catt Analytics 2.0 APIs. For working with Cat Analytics APIs, see [Cat Analytics API Documentation](https://github.com/AdobeDocs/dev-site).
-
-The Cat Analytics APIs are a collection of APIs that power Cat Analytics products like Cat Workspace.
-The APIs allow for the creation of data rich user interfaces that you can use to manipulate and integrate data.
-You can also create reports to explore, get insights, or answer important questions about your data.
+This documentation provides instructions for Adobe Pass Authentication APIs.
 
 ## Discover
 
@@ -34,51 +26,33 @@ You can also create reports to explore, get insights, or answer important questi
 
 [Quickstart Guide](guides/)
 
-Get started with the Cat Analytics APIs.
+Get started with the Adobe Pass Authentication APIs.
 
 <DiscoverBlock slots="heading, link, text"/>
 
 ### Guides
 
-[Calculated Metrics API](guides/dummy_metrics_api/)
+[Session Guide](guides/sessions/)
 
-Returns information on the user's company that is necessary for making other Cat Analytics API calls.
-
-<DiscoverBlock slots="link, text"/>
-
-[Segments API](guides/dummy_oauth_client/)
-
-Provides configuration guidance and best practices for the /segments endpoint.
+Provides configuration guidance and best practices for the /session endpoints.
 
 <DiscoverBlock slots="link, text"/>
 
-[Reporting Guide API](guides/dummy_using_postman/)
+[Decision Guide](guides/decisions/)
 
-Provides configuration guidance and best practices for the /reports endpoint.
+Provides configuration guidance and best practices for the /decision endpoints.
 
 <DiscoverBlock slots="link, text"/>
 
-[Migrating from 1.4 to 2.0](guides/migrating/)
+[Profile Guide](guides/profiles/)
 
-For help migrating from the 1.4 versions of the Analytics API to the newer and more capable /reports API.
+Provides configuration guidance and best practices for the /profile endpoints.
+
 
 <DiscoverBlock width="100%" slots="heading, link, text"/>
 
 ### API References
 
-[Try the API](api/)
+[Try the API](api/one_api/non_interactive)
 
-Try the Analytics API with Swagger UI. Explore, make calls, with full endpoint descriptions.
-
-## Contributing
-
-We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions
-or deletions for this documentation, check out the source from [this github repo](https://github.com/adobe/gatsby-theme-spectrum-example), and submit a pull
-request with your contribution. For more information, refer to the [contributing page](support/contribute/).
-
-## API Requests & Rate Limits
-
-The timeout for API requests through adobe.io is currently *60 seconds*.
-
-The default rate limit for an Cat Analytics Company is *120 requests per minute*. (The limit is enforced as *12 requests every 6 seconds*).
-When rate limiting is being enforced you will get `429` HTTP response codes with the following response body: `{"error_code":"429050","message":"Too many requests"}`.
+Try the Adobe Pass Authentication API with Swagger UI. Explore, make calls, with full endpoint descriptions.

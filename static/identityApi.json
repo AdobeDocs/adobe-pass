@@ -1,0 +1,493 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "DESCRIPTION",
+    "title": "Identity Api"
+  },
+  "host": "sp.auth.adobe.com",
+  "basePath": "/api/v2",
+  "tags": [
+    {
+      "name": "platform-identity-controller-v-2",
+      "description": "Platform Identity Controller V 2"
+    },
+    {
+      "name": "service-token-identity-controller-v-2",
+      "description": "Service Token Identity Controller V 2"
+    }
+  ],
+  "paths": {
+    "/identities": {
+      "get": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Verify the service token identity",
+        "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
+        "operationId": "verifyUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlatformIdentity"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      },
+      "post": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Verify the service token identity",
+        "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
+        "operationId": "verifyUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlatformIdentity"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/certificates": {
+      "get": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Get certificates",
+        "description": "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
+        "operationId": "getCertificatesUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateInfo"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/certificates/{sn}": {
+      "get": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Get certificates by serial number",
+        "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt platform identity payload",
+        "operationId": "getCertificateBySerialNumberUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream"],
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "path",
+            "description": "sn",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/servicetoken": {
+      "get": {
+        "tags": ["service-token-identity-controller-v-2"],
+        "summary": "Verify the service token identity",
+        "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
+        "operationId": "verifyUsingGET_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceTokenIdentity"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      },
+      "post": {
+        "tags": ["service-token-identity-controller-v-2"],
+        "summary": "Verify the service token identity",
+        "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
+        "operationId": "verifyUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceTokenIdentity"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/servicetoken/certificates": {
+      "get": {
+        "tags": ["service-token-identity-controller-v-2"],
+        "summary": "Get certificates",
+        "description": "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
+        "operationId": "getCertificatesUsingGET_5",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateInfo"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/servicetoken/certificates/{sn}": {
+      "get": {
+        "tags": ["service-token-identity-controller-v-2"],
+        "summary": "Get certificates by serial number",
+        "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt service token identity payload",
+        "operationId": "getCertificateBySerialNumberUsingGET_3",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream"],
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "path",
+            "description": "sn",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/{issuer}/certificates": {
+      "get": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Get certificates by issuer",
+        "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner. Currently we are going to return only the first certificate in the list.",
+        "operationId": "getCertificatesUsingGET_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "issuer",
+            "in": "path",
+            "description": "issuer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateInfo"
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
+    "/identities/{issuer}/certificates/{sn}": {
+      "get": {
+        "tags": ["platform-identity-controller-v-2"],
+        "summary": "Get certificates by issuer and serial number",
+        "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner andmatch a serial number.",
+        "operationId": "getCertificateUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream"],
+        "parameters": [
+          {
+            "name": "issuer",
+            "in": "path",
+            "description": "issuer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sn",
+            "in": "path",
+            "description": "sn",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceTokenIdentity": {
+      "type": "object",
+      "properties": {
+        "issuer": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "CertificateInfo": {
+      "type": "object",
+      "properties": {
+        "base64Pem": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serialNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "PlatformIdentity": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

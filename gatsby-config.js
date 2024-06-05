@@ -13,39 +13,39 @@
 module.exports = {
   pathPrefix: process.env.PATH_PREFIX || '/adobe-pass/',
   siteMetadata: {
-    versions: [
-      {
-        title: 'v2.0',
-        selected: true
-      },
-      {
-        title: 'v1.4',
-        path: 'https://github.com/AdobeDocs/dev-site'
-      }
-    ],
     pages: [
       {
-        title: 'Cat Analytics',
+        title: 'Adobe Pass Authentication',
         path: '/'
-      },
-      {
-        title: 'Guides',
-        path: '/guides/'
       },
       {
         title: 'API Reference',
         menu: [
           {
-            title: 'Cat Reference v2.0',
-            description: 'Cat Reporting API',
-            path: '/api/index.md'
+            title: 'One API Interactive',
+            description: 'DESCRIPTION API',
+            path: '/api/one_api/interactive/index.md'
           },
           {
-            title: 'Cat Reference v1.4',
-            description: 'Cat API Spec',
-            path: '/api/1.4.md'
+            title: 'One API Non-Interactive',
+            description: 'DESCRIPTION API',
+            path: '/api/one_api/non_interactive/index.md'
+          },
+          {
+            title: 'Identity API Interactive',
+            description: 'DESCRIPTION IDENTITY API Spec',
+            path: '/api/identity_api/interactive/index.md'
+          },
+          {
+            title: 'Identity API Non-Interactive',
+            description: 'DESCRIPTION IDENTITY API Spec',
+            path: '/api/identity_api/non_interactive/index.md'
           }
         ]
+      },
+      {
+        title: 'Guides',
+        path: '/guides/'
       },
       {
         title: 'Support',
@@ -58,22 +58,18 @@ module.exports = {
         path: '/guides/',
         pages: [
           {
-            title: 'Dummy an OAuth Client',
-            path: '/guides/dummy_oauth_client/'
+            title: 'Sessions',
+            path: '/guides/sessions/'
           },
           {
-            title: 'Dummy OAuth using POSTMAN',
-            path: '/guides/dummy_using_postman/'
+            title: 'Decisions',
+            path: '/guides/decisions/'
+          },
+          {
+            title: 'Profiles',
+            path: '/guides/profiles/'
           }
         ]
-      },
-      {
-        title: 'Cat Metrics API',
-        path: '/guides/dummy_metrics_api/'
-      },
-      {
-        title: 'Migrating',
-        path: '/guides/migrating/'
       },
       {
         title: 'Overview',
@@ -91,17 +87,6 @@ module.exports = {
           {
             title: 'How to contribute',
             path: '/support/contribute/'
-          }
-        ]
-      },
-      {
-        title: 'Community',
-        path: '/support/community/',
-        header: true,
-        pages: [
-          {
-            title: 'Information',
-            path: '/support/community/'
           }
         ]
       }
