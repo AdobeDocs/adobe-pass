@@ -4,4 +4,4 @@ description: Identity API Spec
 ---
 
 [//]: # (<RedoclyAPIBlock src="/static/identityApi.json" width="600px" disableSidebar />)
-<RedoclyAPIBlock src="/identityApi.json" />
+<RedoclyAPIBlock src="/adobe-pass/oneApiOpenApi.json" />
