@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "//sp.auth.adobe.com/api/v2"
+      "url": "https://sp.auth.adobe.com/api/v2"
     }
   ],
   "tags": [

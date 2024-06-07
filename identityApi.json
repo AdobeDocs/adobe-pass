@@ -4,7 +4,7 @@
     "description": "DESCRIPTION",
     "title": "Identity Api"
   },
-  "host": "sp.auth.adobe.com",
+  "host": "https://sp.auth.adobe.com",
   "basePath": "/api/v2",
   "tags": [
     {
