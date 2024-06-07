@@ -1,5 +1,5 @@
 ---
-title: Guides - Cat Analytics
+title: Guides - Adobe Pass Authentication
 description: This is the guides overview page of Cat Analytics 
 ---
 
