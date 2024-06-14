@@ -1,15 +1,10 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Identity Api",
     "description": "DESCRIPTION",
-    "version": "1.0.0"
+    "version": "2.0",
+    "title": "Identity Api"
   },
-  "servers": [
-    {
-      "url": "https://sp.auth.adobe.com/api/v2"
-    }
-  ],
   "tags": [
     {
       "name": "platform-identity-controller-v-2",
@@ -44,28 +39,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       },
@@ -91,28 +80,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -124,7 +107,7 @@
         ],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
-        "operationId": "getCertificatesUsingGET",
+        "operationId": "getCertificatesUsingGET_1",
         "responses": {
           "200": {
             "description": "OK",
@@ -140,28 +123,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -197,28 +174,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -246,28 +217,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       },
@@ -293,28 +258,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -326,7 +285,7 @@
         ],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
-        "operationId": "getCertificatesUsingGET_5",
+        "operationId": "getCertificatesUsingGET_4",
         "responses": {
           "200": {
             "description": "OK",
@@ -342,28 +301,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -399,28 +352,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -432,7 +379,7 @@
         ],
         "summary": "Get certificates by issuer",
         "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner. Currently we are going to return only the first certificate in the list.",
-        "operationId": "getCertificatesUsingGET_3",
+        "operationId": "getCertificatesUsingGET_2",
         "parameters": [
           {
             "name": "issuer",
@@ -459,28 +406,22 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
@@ -525,33 +466,32 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
-            "content": {}
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
-            "content": {}
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
-            "content": {}
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
-            "content": {}
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
-            "content": {}
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
-            "content": {}
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
           }
         }
       }
     }
   },
+  "servers": [
+    {
+      "url": "//https://sp.auth.adobe.com/api/v2"
+    }
+  ],
   "components": {
     "schemas": {
       "ServiceTokenIdentity": {
@@ -605,6 +545,5 @@
         }
       }
     }
-  },
-  "x-original-swagger-version": "2.0"
+  }
 }
