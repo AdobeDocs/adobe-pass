@@ -1,10 +1,15 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
+    "title": "One Api",
     "description": "DESCRIPTION",
-    "version": "2.0",
-    "title": "One Api"
+    "version": "2.0"
   },
+  "servers": [
+    {
+      "url": "https://sp.auth.adobe.com/api/v2"
+    }
+  ],
   "tags": [
     {
       "name": "decisions-controller",
@@ -63,7 +68,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -72,7 +76,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -80,25 +83,32 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {}
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -116,7 +126,6 @@
             "name": "profile",
             "in": "query",
             "description": "Provide profile id",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -161,7 +170,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -170,7 +178,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -179,7 +186,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -188,7 +194,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -206,22 +211,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -284,7 +295,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -293,7 +303,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -302,7 +311,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -311,7 +319,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -320,7 +327,6 @@
             "name": "AP-Subject-Token",
             "in": "header",
             "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -329,7 +335,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -338,7 +343,6 @@
             "name": "Content-Type",
             "in": "header",
             "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -354,7 +358,18 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/retrieveAuthorizeDecisionsForMvpdUsingPOST_1Resources"
+          "description": "A list of resourceIds that identifies the content that might be accessible to a user and is recognized by MVPD authorization endpoints.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -368,24 +383,31 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "resources"
       }
     },
     "/{serviceProvider}/decisions/preauthorize/{mvpd}": {
@@ -446,7 +468,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -455,7 +476,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -464,7 +484,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -473,7 +492,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -482,7 +500,6 @@
             "name": "AP-Subject-Token",
             "in": "header",
             "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -491,7 +508,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -500,7 +516,6 @@
             "name": "Content-Type",
             "in": "header",
             "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -516,7 +531,18 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/retrieveAuthorizeDecisionsForMvpdUsingPOST_1Resources"
+          "description": "A list of resourceIds that identifies the content that might be accessible to a user and is recognized by MVPD authorization endpoints.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -530,24 +556,31 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "resources"
       }
     },
     "/{serviceProvider}/logout/{mvpd}": {
@@ -572,7 +605,6 @@
             "name": "redirectUrl",
             "in": "query",
             "description": "The final redirect url where the programmer application navigates to when the logout final is completed with the mvpd. This parameter needs to be included when the programmer application initiates the logout flow with the mvpd using the \"url\" attribute received in OneAPI logout response.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -617,7 +649,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -626,7 +657,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -635,7 +665,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -644,7 +673,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -653,7 +681,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -662,7 +689,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -680,22 +706,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -740,7 +772,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -749,7 +780,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -758,7 +788,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -776,7 +805,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -785,7 +813,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -794,7 +821,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -812,22 +838,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -890,7 +922,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -908,13 +939,13 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
+          "description": "The Platform SSO profile response containing the needed user metadata for creating a valid authentication token.",
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
@@ -922,7 +953,6 @@
               }
             }
           },
-          "description": "The Platform SSO profile response containing the needed user metadata for creating a valid authentication token.",
           "required": true
         },
         "responses": {
@@ -937,24 +967,31 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
-        }
+        },
+        "x-codegen-request-body-name": "SAMLResponse"
       }
     },
     "/{serviceProvider}/profiles/{mvpd}": {
@@ -1006,7 +1043,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1015,7 +1051,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1024,7 +1059,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1042,7 +1076,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1051,7 +1084,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1060,7 +1092,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1069,7 +1100,6 @@
             "name": "AP-TempPass-Identity",
             "in": "header",
             "description": "The application user information as specified in Flexible Temporary Pass Identity.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1087,22 +1117,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -1174,7 +1210,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1183,7 +1218,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1192,7 +1226,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1201,7 +1234,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1210,7 +1242,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1219,7 +1250,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1237,22 +1267,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -1306,7 +1342,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1315,7 +1350,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1324,7 +1358,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1333,7 +1366,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1342,7 +1374,6 @@
             "name": "AP-Subject-Token",
             "in": "header",
             "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1351,7 +1382,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1360,7 +1390,6 @@
             "name": "Content-Type",
             "in": "header",
             "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1369,14 +1398,33 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/createSessionUsingPOST_1"
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mvpd": {
+                    "type": "string",
+                    "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value."
+                  },
+                  "domainName": {
+                    "type": "string",
+                    "description": "The originating domain of the application performing mvpd login."
+                  },
+                  "redirectUrl": {
+                    "type": "string",
+                    "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded."
+                  }
+                }
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -1390,22 +1438,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -1468,7 +1522,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1486,7 +1539,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1495,7 +1547,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1504,7 +1555,6 @@
             "name": "Content-Type",
             "in": "header",
             "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1513,7 +1563,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1523,21 +1572,21 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "domainName": {
-                    "description": "The originating domain of the application performing mvpd login.",
-                    "type": "string"
-                  },
-                  "redirectUrl": {
-                    "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded.",
-                    "type": "string"
-                  }
-                },
                 "required": [
                   "domainName",
                   "redirectUrl"
-                ]
+                ],
+                "type": "object",
+                "properties": {
+                  "domainName": {
+                    "type": "string",
+                    "description": "The originating domain of the application performing mvpd login."
+                  },
+                  "redirectUrl": {
+                    "type": "string",
+                    "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded."
+                  }
+                }
               }
             }
           },
@@ -1555,22 +1604,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
@@ -1633,7 +1688,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1642,7 +1696,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1651,7 +1704,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1660,7 +1712,6 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1678,22 +1729,28 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       },
@@ -1754,7 +1811,6 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1763,7 +1819,6 @@
             "name": "Adobe-Subject-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1772,7 +1827,6 @@
             "name": "AD-Service-Token",
             "in": "header",
             "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1781,7 +1835,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1790,7 +1843,6 @@
             "name": "Accept",
             "in": "header",
             "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1799,7 +1851,6 @@
             "name": "Content-Type",
             "in": "header",
             "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -1808,14 +1859,33 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
-            "required": false,
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/createSessionUsingPOST_1"
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mvpd": {
+                    "type": "string",
+                    "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value."
+                  },
+                  "domainName": {
+                    "type": "string",
+                    "description": "The originating domain of the application performing mvpd login."
+                  },
+                  "redirectUrl": {
+                    "type": "string",
+                    "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded."
+                  }
+                }
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -1829,72 +1899,34 @@
             }
           },
           "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page.",
+            "content": {}
           },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body.",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process.",
+            "content": {}
           },
           "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend.",
+            "content": {}
           },
           "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow.",
+            "content": {}
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further.",
+            "content": {}
           }
         }
       }
     }
   },
-  "servers": [
-    {
-      "url": "//sp.auth.adobe.com/api/v2"
-    }
-  ],
   "components": {
-    "requestBodies": {
-      "createSessionUsingPOST_1": {
-        "content": {
-          "application/x-www-form-urlencoded": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "mvpd": {
-                  "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value.",
-                  "type": "string"
-                },
-                "domainName": {
-                  "description": "The originating domain of the application performing mvpd login.",
-                  "type": "string"
-                },
-                "redirectUrl": {
-                  "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded.",
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "retrieveAuthorizeDecisionsForMvpdUsingPOST_1Resources": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "description": "A list of resourceIds that identifies the content that might be accessible to a user and is recognized by MVPD authorization endpoints.",
-        "required": true
-      }
-    },
     "schemas": {
       "MediaTokenResponse": {
         "type": "object",
@@ -2234,7 +2266,8 @@
             "type": "string"
           },
           "value": {
-            "type": "object"
+            "type": "object",
+            "properties": {}
           }
         }
       },
@@ -2307,5 +2340,6 @@
         }
       }
     }
-  }
+  },
+  "x-original-swagger-version": "2.0"
 }
