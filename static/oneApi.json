@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "DESCRIPTION",
+    "version": "2.0",
     "title": "One Api"
   },
   "host": "https://sp.auth.adobe.com",
@@ -35,12 +36,18 @@
   "paths": {
     "/authenticate/{serviceProvider}/{code}": {
       "get": {
-        "tags": ["sessions-controller"],
+        "tags": [
+          "sessions-controller"
+        ],
         "summary": "Start authentication session",
         "description": "Perform authentication in user agent",
-        "operationId": "startAuthenticationUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
+        "operationId": "startAuthenticationUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
         "parameters": [
           {
             "name": "code",
@@ -96,14 +103,127 @@
         }
       }
     },
+    "/{serviceProvider}/configuration": {
+      "get": {
+        "tags": [
+          "configuration-controller"
+        ],
+        "summary": "Retrieve configuration for specific service provider",
+        "description": "The Configuration API can be used to retrieve the configuration associated with a particular Service Provider.",
+        "operationId": "handleRequestUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "Provide profile id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "serviceProvider",
+            "in": "path",
+            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Device-Info",
+            "in": "header",
+            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Forwarded-For",
+            "in": "header",
+            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-SDK-Identifier",
+            "in": "header",
+            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "The user agent of the client application.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "302": {
+            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400": {
+            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401": {
+            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404": {
+            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405": {
+            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500": {
+            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        }
+      }
+    },
     "/{serviceProvider}/decisions/authorize/{mvpd}": {
       "post": {
-        "tags": ["decisions-controller"],
-        "summary": "Retrieve list of preauthorized resources for specific MVPD",
+        "tags": [
+          "decisions-controller"
+        ],
+        "summary": "Retrieve authorization decisions using specific MVPD",
         "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
-        "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "mvpd",
@@ -139,10 +259,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -153,10 +280,17 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
@@ -188,10 +322,10 @@
             "type": "string"
           },
           {
-            "name": "User-Agent",
+            "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The user agent of the client application.",
-            "required": false,
+            "description": "The Base64-encoded payload containing the partner framework status.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -225,12 +359,18 @@
     },
     "/{serviceProvider}/decisions/preauthorize/{mvpd}": {
       "post": {
-        "tags": ["decisions-controller"],
-        "summary": "Retrieve list of preauthorized resources for specific MVPD",
+        "tags": [
+          "decisions-controller"
+        ],
+        "summary": "Retrieve preauthorization decisions using specific MVPD",
         "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
         "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "mvpd",
@@ -266,10 +406,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -280,10 +427,17 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
@@ -315,10 +469,10 @@
             "type": "string"
           },
           {
-            "name": "User-Agent",
+            "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The user agent of the client application.",
-            "required": false,
+            "description": "The Base64-encoded payload containing the partner framework status.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -352,12 +506,18 @@
     },
     "/{serviceProvider}/logout/{mvpd}": {
       "get": {
-        "tags": ["logout-controller"],
+        "tags": [
+          "logout-controller"
+        ],
         "summary": "Initiate logout for all authenticated profiles of specific MVPD",
         "description": "The logout service performs the following: deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD returns a list of actions the client application must perform in order to finalize the logout flow for the authenticated profile with specified MVPD",
-        "operationId": "getLogoutForMvpdUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getLogoutForMvpdUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "mvpd",
@@ -388,10 +548,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -402,23 +569,23 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -467,39 +634,24 @@
     },
     "/{serviceProvider}/profiles": {
       "get": {
-        "tags": ["profiles-controller"],
-        "summary": "Get information about authenticated profiles",
+        "tags": [
+          "profiles-controller"
+        ],
+        "summary": "Retrieve authenticated profiles",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device and application, each authenticated profile representing an authenticated user with a specific MVPD",
-        "operationId": "getProfilesUsingGET_1",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getProfilesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "serviceProvider",
             "in": "path",
             "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "X-Device-Info",
-            "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "X-Forwarded-For",
-            "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
             "type": "string"
           },
           {
@@ -510,16 +662,44 @@
             "type": "string"
           },
           {
-            "name": "AP-SDK-Identifier",
+            "name": "X-Device-Info",
             "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Forwarded-For",
+            "in": "header",
+            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "AP-Subject-Token",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-Partner-Framework-Status",
+            "in": "header",
+            "description": "The Base64-encoded payload containing the partner framework status.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AP-SDK-Identifier",
+            "in": "header",
+            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
             "required": false,
             "type": "string"
           },
@@ -566,26 +746,25 @@
         }
       }
     },
-    "/{serviceProvider}/profiles/sso/{partner}/{mvpd}": {
+    "/{serviceProvider}/profiles/sso/{partner}": {
       "post": {
-        "tags": ["partner-sso-controller"],
-        "summary": "Send the mvpd profile information and generate a Pass profile",
+        "tags": [
+          "partner-sso-controller"
+        ],
+        "summary": "Retrieve authenticated profile using partner authentication response",
         "description": "The partner SSO application sends the mvpd profile information and Pass server saves the profile information in order to use it for decisions calls.",
-        "operationId": "createPartnerProfileUsingPOST",
-        "consumes": ["application/x-www-form-urlencoded"],
-        "produces": ["application/json"],
+        "operationId": "createPartnerProfileUsingPOST_1",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "partner",
             "in": "path",
-            "description": "The name of the partner providing the sso framework that is integrated with Pass flows. Currently, only Apple has such framework (called VSA)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "mvpd",
-            "in": "path",
-            "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+            "description": "The name of the partner (e.g. Apple) providing the sso framework that is integrated with Pass flows.",
             "required": true,
             "type": "string"
           },
@@ -620,6 +799,20 @@
             "type": "string"
           },
           {
+            "name": "X-Device-Info",
+            "in": "header",
+            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Forwarded-For",
+            "in": "header",
+            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
             "description": "The Base64-encoded payload containing the partner framework status.",
@@ -627,16 +820,9 @@
             "type": "string"
           },
           {
-            "name": "X-Device-Info",
+            "name": "AP-SDK-Identifier",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "X-Forwarded-For",
-            "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
             "required": false,
             "type": "string"
           }
@@ -671,12 +857,18 @@
     },
     "/{serviceProvider}/profiles/{mvpd}": {
       "get": {
-        "tags": ["profiles-controller"],
-        "summary": "Get information about authenticated profiles for specific MVPD",
+        "tags": [
+          "profiles-controller"
+        ],
+        "summary": "Retrieve authenticated profiles for specific MVPD",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application and specific MVPD provided as a path parameter.",
         "operationId": "getProfileForMvpdUsingGET_1",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "mvpd",
@@ -693,9 +885,9 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
             "required": true,
             "type": "string"
           },
@@ -703,7 +895,7 @@
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -714,9 +906,23 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-Partner-Framework-Status",
+            "in": "header",
+            "description": "The Base64-encoded payload containing the partner framework status.",
             "required": true,
             "type": "string"
           },
@@ -724,13 +930,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -745,6 +944,13 @@
             "name": "User-Agent",
             "in": "header",
             "description": "The user agent of the client application.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-TempPass-Identity",
+            "in": "header",
+            "description": "The application user information as specified in Flexible Temporary Pass Identity.",
             "required": false,
             "type": "string"
           }
@@ -779,12 +985,18 @@
     },
     "/{serviceProvider}/profiles/{mvpd}/{code}": {
       "get": {
-        "tags": ["profiles-controller"],
-        "summary": "Get information about authenticated profiles for specific MVPD and specific CODE",
+        "tags": [
+          "profiles-controller"
+        ],
+        "summary": "Retrieve authenticated profiles for specific MVPD and specific code\n",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application, mvpd and specific registration code provided as a path parameter.",
         "operationId": "getProfileForMvpdAndForCodeUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "code",
@@ -815,10 +1027,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -829,23 +1048,23 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -894,24 +1113,30 @@
     },
     "/{serviceProvider}/sessions": {
       "post": {
-        "tags": ["sessions-controller"],
-        "summary": "Initiate authentication session",
+        "tags": [
+          "sessions-controller"
+        ],
+        "summary": "Create authentication session",
         "description": "In order to initiate the authentication session from a primary device only a valid serviceProvider parameter value must be provided, while the mvpd, domainName and redirectUrl parameter values may be provided in a later call.",
-        "operationId": "createSessionUsingPOST",
-        "consumes": ["application/x-www-form-urlencoded"],
-        "produces": ["application/json"],
+        "operationId": "createSessionUsingPOST_1",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "mvpd",
             "in": "formData",
-            "description": "The MVPD identifier associated with the end-user's subscription.",
+            "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing MVPD login.",
+            "description": "The originating domain of the application performing mvpd login.",
             "required": false,
             "type": "string"
           },
@@ -937,10 +1162,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -951,10 +1183,17 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
@@ -1023,31 +1262,30 @@
     },
     "/{serviceProvider}/sessions/sso/{partner}": {
       "post": {
-        "tags": ["partner-sso-controller"],
-        "summary": "Obtain saml request code",
+        "tags": [
+          "partner-sso-controller"
+        ],
+        "summary": "Retrieve partner authentication request",
         "description": "This endpoint returns a verification code which is essentially the authentication request. The format should follow the general rules of the OneAPI endpoints so it is a json-formatted body. For degraded integrations, return a json response indicating that the integration is degraded and the next call should be the one in /decisions endpoint.",
-        "operationId": "retrieveVerificationTokenUsingPOST",
-        "consumes": ["application/x-www-form-urlencoded"],
-        "produces": ["application/json"],
+        "operationId": "retrieveVerificationTokenUsingPOST_1",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "partner",
             "in": "path",
-            "description": "The name of the partner providing the sso framework that is integrated with Pass flows. Currently, only Apple has such framework (called VSA)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "mvpd",
-            "in": "formData",
-            "description": "The MVPD identifier associated with the end-user's subscription.",
+            "description": "The name of the partner (e.g. Apple) providing the sso framework that is integrated with Pass flows.",
             "required": true,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing MVPD login.",
+            "description": "The originating domain of the application performing mvpd login.",
             "required": true,
             "type": "string"
           },
@@ -1073,10 +1311,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -1087,9 +1332,9 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The Base64-encoded payload containing the partner framework status.",
             "required": true,
             "type": "string"
           },
@@ -1097,13 +1342,6 @@
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -1122,10 +1360,10 @@
             "type": "string"
           },
           {
-            "name": "AP-Partner-Framework-Status",
+            "name": "User-Agent",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
+            "description": "The user agent of the client application.",
+            "required": false,
             "type": "string"
           }
         ],
@@ -1159,12 +1397,18 @@
     },
     "/{serviceProvider}/sessions/{code}": {
       "get": {
-        "tags": ["sessions-controller"],
-        "summary": "Get authentication session status",
+        "tags": [
+          "sessions-controller"
+        ],
+        "summary": "Retrieve authentication session using code",
         "description": "Retrieve information for existing authentication session using registration code",
-        "operationId": "getSessionStatusUsingGET_1",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getSessionStatusUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "code",
@@ -1188,10 +1432,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -1202,23 +1453,9 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
-            "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -1265,12 +1502,18 @@
         }
       },
       "post": {
-        "tags": ["sessions-controller"],
+        "tags": [
+          "sessions-controller"
+        ],
         "summary": "Resume authentication session",
         "description": " Continue / update authentication for existing authentication session using registration code",
-        "operationId": "resumeSessionUsingPOST",
-        "consumes": ["application/x-www-form-urlencoded"],
-        "produces": ["application/json"],
+        "operationId": "resumeSessionUsingPOST_1",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "code",
@@ -1282,14 +1525,14 @@
           {
             "name": "mvpd",
             "in": "formData",
-            "description": "The MVPD identifier associated with the end-user's subscription.",
+            "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing MVPD login.",
+            "description": "The originating domain of the application performing mvpd login.",
             "required": false,
             "type": "string"
           },
@@ -1315,10 +1558,17 @@
             "type": "string"
           },
           {
+            "name": "AP-Device-Identifier",
+            "in": "header",
+            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "X-Device-Info",
             "in": "header",
             "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -1329,23 +1579,23 @@
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AD-Service-Token",
+            "in": "header",
+            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "required": false,
             "type": "string"
           },
           {
             "name": "AP-SDK-Identifier",
             "in": "header",
             "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
             "required": false,
             "type": "string"
           },
@@ -1647,9 +1897,6 @@
         "actionType": {
           "type": "string"
         },
-        "authenticationRequest": {
-          "$ref": "#/definitions/AuthenticationRequest"
-        },
         "code": {
           "type": "string"
         },
@@ -1734,7 +1981,8 @@
             "degraded_integration",
             "framework_permissions_not_present",
             "framework_permissions_not_determined",
-            "framework_permissions_not_granted"
+            "framework_permissions_not_granted",
+            "framework_mappingid_not_determined"
           ]
         },
         "state": {
@@ -1745,9 +1993,6 @@
         }
       }
     },
-    "Collection«string»": {
-      "type": "object"
-    },
     "Domain": {
       "type": "object",
       "properties": {
@@ -1755,20 +2000,6 @@
           "type": "boolean"
         },
         "name": {
-          "type": "string"
-        }
-      }
-    },
-    "AuthenticationRequest": {
-      "type": "object",
-      "properties": {
-        "attributesNames": {
-          "$ref": "#/definitions/Collection«string»"
-        },
-        "request": {
-          "type": "string"
-        },
-        "type": {
           "type": "string"
         }
       }
