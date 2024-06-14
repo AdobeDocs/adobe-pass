@@ -5,8 +5,11 @@
     "version": "2.0",
     "title": "One Api"
   },
-  "host": "https://sp.auth.adobe.com",
+  "host": "sp.auth.adobe.com",
   "basePath": "/api/v2",
+  "schemes": [
+    "https"
+  ],
   "tags": [
     {
       "name": "decisions-controller",
