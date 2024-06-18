@@ -27,30 +27,6 @@ module.exports = {
             path: '/api/one_api/interactive/index.md'
           }
         ]
-      },
-      {
-        title: 'Guides',
-        path: '/guides/'
-      }
-    ],
-    subPages: [
-      {
-        title: 'Get Started',
-        path: '/guides/',
-        pages: [
-          {
-            title: 'Sessions',
-            path: '/guides/sessions/'
-          },
-          {
-            title: 'Decisions',
-            path: '/guides/decisions/'
-          },
-          {
-            title: 'Profiles',
-            path: '/guides/profiles/'
-          }
-        ]
       }
     ]
   },
