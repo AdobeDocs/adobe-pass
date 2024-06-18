@@ -25,21 +25,12 @@ module.exports = {
             title: 'One API Interactive',
             description: 'DESCRIPTION API',
             path: '/api/one_api/interactive/index.md'
-          },
-          {
-            title: 'One API Non-Interactive',
-            description: 'DESCRIPTION API',
-            path: '/api/one_api/non_interactive/index.md'
           }
         ]
       },
       {
         title: 'Guides',
         path: '/guides/'
-      },
-      {
-        title: 'Support',
-        path: '/support/'
       }
     ],
     subPages: [
@@ -58,25 +49,6 @@ module.exports = {
           {
             title: 'Profiles',
             path: '/guides/profiles/'
-          }
-        ]
-      },
-      {
-        title: 'Overview',
-        path: '/support/',
-        header: true,
-        pages: [
-          {
-            title: 'Help',
-            path: '/support/'
-          },
-          {
-            title: 'FAQ',
-            path: '/support/FAQ/'
-          },
-          {
-            title: 'How to contribute',
-            path: '/support/contribute/'
           }
         ]
       }
