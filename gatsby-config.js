@@ -27,29 +27,15 @@ module.exports = {
             path: '/api/one_api/interactive/index.md'
           },
           {
-            title: 'One API Non-Interactive',
-            description: 'DESCRIPTION API',
-            path: '/api/one_api/non_interactive/index.md'
-          },
-          {
             title: 'Identity API Interactive',
             description: 'DESCRIPTION IDENTITY API Spec',
             path: '/api/identity_api/interactive/index.md'
-          },
-          {
-            title: 'Identity API Non-Interactive',
-            description: 'DESCRIPTION IDENTITY API Spec',
-            path: '/api/identity_api/non_interactive/index.md'
           }
         ]
       },
       {
         title: 'Guides',
         path: '/guides/'
-      },
-      {
-        title: 'Support',
-        path: '/support/'
       }
     ],
     subPages: [
@@ -68,25 +54,6 @@ module.exports = {
           {
             title: 'Profiles',
             path: '/guides/profiles/'
-          }
-        ]
-      },
-      {
-        title: 'Overview',
-        path: '/support/',
-        header: true,
-        pages: [
-          {
-            title: 'Help',
-            path: '/support/'
-          },
-          {
-            title: 'FAQ',
-            path: '/support/FAQ/'
-          },
-          {
-            title: 'How to contribute',
-            path: '/support/contribute/'
           }
         ]
       }
