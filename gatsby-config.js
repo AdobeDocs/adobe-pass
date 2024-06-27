@@ -22,9 +22,12 @@ module.exports = {
         title: 'API Reference',
         menu: [
           {
-            title: 'One API Interactive',
-            description: 'DESCRIPTION API',
-            path: '/api/one_api/interactive/index.md'
+            title: 'DCR API',
+            path: '/api/dcr_api/interactive/index.md'
+          },
+          {
+            title: 'REST API V2',
+            path: '/api/rest_api_v2/interactive/index.md'
           }
         ]
       }
