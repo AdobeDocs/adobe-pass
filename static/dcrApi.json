@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "DCR Api"
+  },
+  "host": "sp.auth.adobe.com",
+  "basePath": "/o",
+  "tags": [
+    {
+      "name": "client-registration-o-auth-2-controller",
+      "description": "Client Registration O Auth 2 Controller"
+    }
+  ],
+  "paths": {
+    "/client/register": {
+      "post": {
+        "tags": ["Client Registration"],
+        "summary": "Register client application",
+        "description": "Get client credentials for a software statement and get scopes information",
+        "operationId": "processSoftwareStatementUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "clientRegistrationRequest",
+            "description": "The software statement created in TVE Dashboard and the URI that the application uses for completing the authentication flow can optionally be present.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientRegistrationRequest"
+            }
+          },
+          {
+            "name": "X-Device-Info",
+            "in": "header",
+            "description": "The device information as defined in Passing Device and Connection Information",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "The user agent",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was executed successfully - additional information can be found in the response body."
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ClientApplication"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/client/token": {
+      "post": {
+        "tags": ["Client Registration"],
+        "summary": "Retrieve client token",
+        "description": "Get access token for a pair of client credentials",
+        "operationId": "generateAccessTokenUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "Client identifier obtained in the client registration process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "Client identifier obtained in the client registration process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "refresh_token",
+            "in": "query",
+            "description": "The token used to refresh the access token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grant_type",
+            "in": "query",
+            "description": "Received in the client registration process. The accepted value is: client_credentials: Used for insecure clients, such as the Android SDK.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was executed successfully - additional information can be found in the response body."
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ClientRegistrationAccessTokenResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClientRegistrationRequest": {
+      "type": "object",
+      "required": ["redirect_uri", "software_statement"],
+      "properties": {
+        "software_statement": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
