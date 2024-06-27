@@ -5,14 +5,14 @@ description: This is the overview page of Cat Analytics
 #  - https://github.com/icaraps 
 ---
 
-<Hero slots="heading, text"/>
+<Hero slots="heading, text"></Hero>
 
 # Adobe Pass Authentication
 
 Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining
 whether someone who requests access to a resource is entitled to it.
 
-<Resources slots="heading, links"/>
+<Resources slots="heading, links"></Resources>
 
 #### Resources
 
@@ -25,7 +25,7 @@ This documentation provides instructions for Adobe Pass Authentication APIs.
 
 ## Discover
 
-<DiscoverBlock width="100%" slots="heading, link, text"/>
+<DiscoverBlock width="100%" slots="heading, link, text"></DiscoverBlock>
 
 ### Get Started
 
@@ -33,7 +33,7 @@ This documentation provides instructions for Adobe Pass Authentication APIs.
 
 Get started with the Cat Analytics APIs.
 
-<DiscoverBlock slots="heading, link, text"/>
+<DiscoverBlock slots="heading, link, text"></DiscoverBlock>
 
 ### Guides
 
@@ -41,22 +41,22 @@ Get started with the Cat Analytics APIs.
 
 Provides configuration guidance and best practices for the /session endpoints.
 
-<DiscoverBlock slots="link, text"/>
+<DiscoverBlock slots="link, text"></DiscoverBlock>
 
 [Profile Guide](guides/profiles/)
 
 Provides configuration guidance and best practices for the /profile endpoint.
 
-<DiscoverBlock slots="link, text"/>
+<DiscoverBlock slots="link, text"></DiscoverBlock>
 
 [Decision Guide](guides/decisions/)
 
 Provides configuration guidance and best practices for the /decision endpoint.
 
-<DiscoverBlock width="100%" slots="heading, link, text"/>
+<DiscoverBlock width="100%" slots="heading, link, text"></DiscoverBlock>
 
 ### API References
 
-[Try the API](api/one_api/interactive)
+[Try the API](api/rest_api_v2/interactive)
 
 Try the Analytics API with Swagger UI. Explore, make calls, with full endpoint descriptions.
