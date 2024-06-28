@@ -5,7 +5,7 @@
     "version" : "2.0"
   },
   "servers" : [ {
-    "url" : "https://sp.auth.adobe.com/api/o"
+    "url" : "https://sp.auth.adobe.com/o"
   } ],
   "tags" : [ {
     "description" : "Client Registration O Auth 2 Controller",
@@ -140,6 +140,64 @@
   },
   "components" : {
     "schemas" : {
+      "ClientRegistrationAccessTokenResponse" : {
+        "properties" : {
+          "access_token" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "expires_in" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "refresh_token" : {
+            "type" : "string"
+          },
+          "token_type" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ClientApplication" : {
+        "properties" : {
+          "client_id" : {
+            "type" : "string"
+          },
+          "client_id_issued_at" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "client_secret" : {
+            "type" : "string"
+          },
+          "grant_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "redirect_uris" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "scopes" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
       "ClientRegistrationRequest" : {
         "properties" : {
           "software_statement" : {
