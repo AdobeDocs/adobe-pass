@@ -8,8 +8,8 @@
     "url" : "https://sp.auth.adobe.com/o"
   } ],
   "tags" : [ {
-    "description" : "Client Registration O Auth 2 Controller",
-    "name" : "client-registration-o-auth-2-controller"
+    "description" : "It secures client communications between a programmer application or server and the Adobe Pass services",
+    "name" : "Dynamic Client Registration"
   } ],
   "paths" : {
     "/client/register" : {
@@ -73,7 +73,7 @@
           }
         },
         "summary" : "Register client application",
-        "tags" : [ "Client Registration" ],
+        "tags" : [ "Dynamic Client Registration" ],
         "x-codegen-request-body-name" : "clientRegistrationRequest"
       }
     },
@@ -134,7 +134,7 @@
           }
         },
         "summary" : "Retrieve client token",
-        "tags" : [ "Client Registration" ]
+        "tags" : [ "Dynamic Client Registration" ]
       }
     }
   },
