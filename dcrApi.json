@@ -11,14 +11,14 @@
   ],
   "tags": [
     {
-      "name": "client-registration-o-auth-2-controller",
-      "description": "Client Registration O Auth 2 Controller"
+      "name": "Dynamic Client Registration",
+      "description": "It secures client communications between a programmer application or server and the Adobe Pass services"
     }
   ],
   "paths": {
     "/client/register": {
       "post": {
-        "tags": ["Client Registration"],
+        "tags": ["Dynamic Client Registration"],
         "summary": "Register client application",
         "description": "Get client credentials for a software statement and get scopes information",
         "operationId": "processSoftwareStatementUsingPOST",
@@ -74,7 +74,7 @@
     },
     "/client/token": {
       "post": {
-        "tags": ["Client Registration"],
+        "tags": ["Dynamic Client Registration"],
         "summary": "Retrieve client token",
         "description": "Get access token for a pair of client credentials",
         "operationId": "generateAccessTokenUsingPOST",
