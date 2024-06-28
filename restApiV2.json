@@ -1,56 +1,49 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "DESCRIPTION",
     "version": "2.0",
     "title": "One Api"
   },
   "host": "sp.auth.adobe.com",
-  "basePath": "/api/v2",
+  "basePath": "/restv2/api/v2",
   "schemes": [
     "https"
   ],
   "tags": [
     {
-      "name": "decisions-controller",
-      "description": "Decisions Controller"
+      "name": "Decision Controller",
+      "description": "It can be used to obtain an authorization/preauthorization decision/s for one resource."
     },
     {
-      "name": "sessions-controller",
-      "description": "Sessions Controller"
+      "name": "Sessions Controller",
+      "description": "It can be used to initiate user authentication."
     },
     {
-      "name": "profiles-controller",
-      "description": "Profiles Controller"
+      "name": "Profiles Controller",
+      "description": "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application."
     },
     {
-      "name": "logout-controller",
-      "description": "Logout Controller"
+      "name": "Configuration Controller",
+      "description": "It can be used to retrieve the configuration associated with a particular Service Provider."
     },
     {
-      "name": "partner-sso-controller",
-      "description": "Partner SSO Controller"
+      "name": "Logout Controller",
+      "description": "It deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD."
     },
     {
-      "name": "configuration-controller",
-      "description": "Configuration Controller"
+      "name": "Partner SSO Controller",
+      "description": "It can be used to handle partner authentication."
     }
   ],
   "paths": {
     "/authenticate/{serviceProvider}/{code}": {
       "get": {
-        "tags": [
-          "sessions-controller"
-        ],
+        "tags": ["Sessions Controller"],
         "summary": "Start authentication session",
         "description": "Perform authentication in user agent",
-        "operationId": "startAuthenticationUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "operationId": "startAuthenticationUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "code",
@@ -108,18 +101,12 @@
     },
     "/{serviceProvider}/configuration": {
       "get": {
-        "tags": [
-          "configuration-controller"
-        ],
+        "tags": ["Configuration Controller"],
         "summary": "Retrieve configuration for specific service provider",
         "description": "The Configuration API can be used to retrieve the configuration associated with a particular Service Provider.",
         "operationId": "handleRequestUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "profile",
@@ -215,18 +202,12 @@
     },
     "/{serviceProvider}/decisions/authorize/{mvpd}": {
       "post": {
-        "tags": [
-          "decisions-controller"
-        ],
+        "tags": ["Decision Controller"],
         "summary": "Retrieve authorization decisions using specific MVPD",
         "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
         "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "mvpd",
@@ -362,18 +343,12 @@
     },
     "/{serviceProvider}/decisions/preauthorize/{mvpd}": {
       "post": {
-        "tags": [
-          "decisions-controller"
-        ],
+        "tags": ["Decision Controller"],
         "summary": "Retrieve preauthorization decisions using specific MVPD",
         "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
         "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "mvpd",
@@ -509,18 +484,12 @@
     },
     "/{serviceProvider}/logout/{mvpd}": {
       "get": {
-        "tags": [
-          "logout-controller"
-        ],
+        "tags": ["Logout Controller"],
         "summary": "Initiate logout for all authenticated profiles of specific MVPD",
         "description": "The logout service performs the following: deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD returns a list of actions the client application must perform in order to finalize the logout flow for the authenticated profile with specified MVPD",
-        "operationId": "getLogoutForMvpdUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "getLogoutForMvpdUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "mvpd",
@@ -637,18 +606,12 @@
     },
     "/{serviceProvider}/profiles": {
       "get": {
-        "tags": [
-          "profiles-controller"
-        ],
+        "tags": ["Profiles Controller"],
         "summary": "Retrieve authenticated profiles",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device and application, each authenticated profile representing an authenticated user with a specific MVPD",
-        "operationId": "getProfilesUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "getProfilesUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "serviceProvider",
@@ -751,18 +714,12 @@
     },
     "/{serviceProvider}/profiles/sso/{partner}": {
       "post": {
-        "tags": [
-          "partner-sso-controller"
-        ],
+        "tags": ["Partner SSO Controller"],
         "summary": "Retrieve authenticated profile using partner authentication response",
         "description": "The partner SSO application sends the mvpd profile information and Pass server saves the profile information in order to use it for decisions calls.",
         "operationId": "createPartnerProfileUsingPOST_1",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "partner",
@@ -860,18 +817,12 @@
     },
     "/{serviceProvider}/profiles/{mvpd}": {
       "get": {
-        "tags": [
-          "profiles-controller"
-        ],
+        "tags": ["Profiles Controller"],
         "summary": "Retrieve authenticated profiles for specific MVPD",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application and specific MVPD provided as a path parameter.",
-        "operationId": "getProfileForMvpdUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "getProfileForMvpdUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "mvpd",
@@ -988,18 +939,12 @@
     },
     "/{serviceProvider}/profiles/{mvpd}/{code}": {
       "get": {
-        "tags": [
-          "profiles-controller"
-        ],
+        "tags": ["Profiles Controller"],
         "summary": "Retrieve authenticated profiles for specific MVPD and specific code\n",
         "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application, mvpd and specific registration code provided as a path parameter.",
         "operationId": "getProfileForMvpdAndForCodeUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "code",
@@ -1116,18 +1061,12 @@
     },
     "/{serviceProvider}/sessions": {
       "post": {
-        "tags": [
-          "sessions-controller"
-        ],
+        "tags": ["Sessions Controller"],
         "summary": "Create authentication session",
         "description": "In order to initiate the authentication session from a primary device only a valid serviceProvider parameter value must be provided, while the mvpd, domainName and redirectUrl parameter values may be provided in a later call.",
-        "operationId": "createSessionUsingPOST_1",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "createSessionUsingPOST",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "mvpd",
@@ -1265,18 +1204,12 @@
     },
     "/{serviceProvider}/sessions/sso/{partner}": {
       "post": {
-        "tags": [
-          "partner-sso-controller"
-        ],
+        "tags": ["Partner SSO Controller"],
         "summary": "Retrieve partner authentication request",
         "description": "This endpoint returns a verification code which is essentially the authentication request. The format should follow the general rules of the OneAPI endpoints so it is a json-formatted body. For degraded integrations, return a json response indicating that the integration is degraded and the next call should be the one in /decisions endpoint.",
         "operationId": "retrieveVerificationTokenUsingPOST_1",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "partner",
@@ -1374,7 +1307,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PartnerSessionResponse"
+              "$ref": "#/definitions/SessionResponse"
             }
           },
           "302": {
@@ -1400,18 +1333,12 @@
     },
     "/{serviceProvider}/sessions/{code}": {
       "get": {
-        "tags": [
-          "sessions-controller"
-        ],
+        "tags": ["Sessions Controller"],
         "summary": "Retrieve authentication session using code",
         "description": "Retrieve information for existing authentication session using registration code",
-        "operationId": "getSessionStatusUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "getSessionStatusUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "code",
@@ -1505,18 +1432,12 @@
         }
       },
       "post": {
-        "tags": [
-          "sessions-controller"
-        ],
+        "tags": ["Sessions Controller"],
         "summary": "Resume authentication session",
         "description": " Continue / update authentication for existing authentication session using registration code",
         "operationId": "resumeSessionUsingPOST_1",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "code",
@@ -1705,13 +1626,17 @@
       "type": "object",
       "properties": {
         "authorized": {
-          "type": "boolean"
+          "type": "boolean",
+          "example": false,
+          "description": "The authorization decision for the resource. Can be either true or false."
         },
         "error": {
+          "description": "If the decision is \"false\" the error object contains additional information about the Deny decision according to the error information.",
           "$ref": "#/definitions/ErrorInformation"
         },
         "mvpd": {
-          "type": "string"
+          "type": "string",
+          "description": "The internal unique identifier associated with an Identity Provider during on-boarding process."
         },
         "notAfter": {
           "type": "integer",
@@ -1722,18 +1647,23 @@
           "format": "int64"
         },
         "resource": {
-          "type": "string"
+          "type": "string",
+          "description": "The resource identifier for which the authorize decision is returned."
         },
         "serviceProvider": {
-          "type": "string"
+          "type": "string",
+          "description": "The internal unique identifier associated with a Service Provider during on-boarding process."
         },
         "source": {
-          "type": "string"
+          "type": "string",
+          "description": "Information about decision source: degradation, temppass, mvpd or dummy."
         },
         "token": {
+          "description": "Information about media token: issuedAt, notBefore, notAfter and serializedToken.",
           "$ref": "#/definitions/MediaTokenResponse"
         }
-      }
+      },
+      "description": "Response object for decision requests"
     },
     "Message": {
       "type": "object"
@@ -1765,34 +1695,42 @@
       "properties": {
         "existing": {
           "type": "object",
+          "description": "The existing parameters that were already provided.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "missing": {
           "type": "array",
+          "description": "The existing parameters that were already provided.",
           "items": {
             "type": "string"
           }
         }
-      }
+      },
+      "description": "Response object for session status requests"
     },
     "MvpdLogoutResponse": {
       "type": "object",
       "properties": {
         "actionName": {
-          "type": "string"
+          "type": "string",
+          "description": "The action to be performed in a user-agent."
         },
         "actionType": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of interaction the client application must perform in order to continue the flow with the action specified by the parameter \"actionName\"."
         },
         "mvpd": {
-          "type": "string"
+          "type": "string",
+          "description": "The internal unique identifier associated with an Identity Provider during on-boarding process."
         },
         "url": {
-          "type": "string"
+          "type": "string",
+          "description": "The logout URL used to perform logout flow with the MVPD endpoint. It is not present when: actionName=complete or actionName=invalid."
         }
-      }
+      },
+      "description": "Mvpd logout response"
     },
     "ErrorInformation": {
       "type": "object",
@@ -1891,38 +1829,6 @@
         }
       }
     },
-    "PartnerSessionResponse": {
-      "type": "object",
-      "properties": {
-        "actionName": {
-          "type": "string"
-        },
-        "actionType": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "missingParameters": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "mvpd": {
-          "type": "string"
-        },
-        "serviceProvider": {
-          "type": "string"
-        },
-        "sessionId": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      }
-    },
     "UserMetadataResponse": {
       "type": "object",
       "properties": {
@@ -1985,7 +1891,8 @@
             "framework_permissions_not_present",
             "framework_permissions_not_determined",
             "framework_permissions_not_granted",
-            "framework_mappingid_not_determined"
+            "framework_mappingid_not_determined",
+            "framework_mappingid_mismatch"
           ]
         },
         "state": {
@@ -2011,58 +1918,73 @@
       "type": "object",
       "properties": {
         "actionName": {
-          "type": "string"
+          "type": "string",
+          "description": "The action that primary device need to perform in order to complete authentication flow."
         },
         "actionType": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of interaction the client application must perform in order to continue the flow with the action specified by the parameter \"actionName\"."
         },
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The registration code that can be used on the secondary device to continue the authentication flow."
         },
         "missingParameters": {
           "type": "array",
+          "description": "The missing parameters that need to be provided in order to complete the authentication flow.",
           "items": {
             "type": "string"
           }
         },
         "mvpd": {
-          "type": "string"
+          "type": "string",
+          "description": "The id of the identity provider."
         },
         "serviceProvider": {
-          "type": "string"
+          "type": "string",
+          "description": "The id of the service provider."
         },
         "sessionId": {
-          "type": "string"
+          "type": "string",
+          "description": "The opaque identifier that can be used for tracking user activity."
         },
         "url": {
-          "type": "string"
+          "type": "string",
+          "description": "The url where the application needs to navigate."
         }
-      }
+      },
+      "description": "Response object for session requests"
     },
     "MvpdProfileResponse": {
       "type": "object",
       "properties": {
         "attributes": {
           "type": "object",
+          "description": "The list of user metadata attributes. These attributes can be mandatory (userId) or non-mandatory (the rest of the user metadata fields like zip, householdId, maxRating, etc.).",
           "additionalProperties": {
             "$ref": "#/definitions/UserMetadataResponse"
           }
         },
         "issuer": {
-          "type": "string"
+          "type": "string",
+          "description": "The entity that owns the authenticated profile."
         },
         "notAfter": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The maximum timestamp for the authentication profile time-to-live (ttl)."
         },
         "notBefore": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The minimum timestamp for the authentication profile time-to-live (ttl)."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the authenticated profile."
         }
-      }
+      },
+      "description": "Mvpd profile response"
     }
   }
 }
