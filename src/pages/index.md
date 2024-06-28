@@ -27,4 +27,4 @@ This documentation provides instructions for Adobe Pass Authentication APIs.
 
 [Try the API](api/rest_api_v2/interactive)
 
-Try the Analytics API with Swagger UI. Explore, make calls, with full endpoint descriptions.
+Try the Adobe Pass REST API V2. Explore, make calls, with full endpoint descriptions.
