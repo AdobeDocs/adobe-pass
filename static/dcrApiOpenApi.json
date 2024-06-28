@@ -53,10 +53,6 @@
           "required" : true
         },
         "responses" : {
-          "200" : {
-            "content" : { },
-            "description" : "The request was executed successfully - additional information can be found in the response body."
-          },
           "201" : {
             "content" : {
               "application/json" : {
@@ -114,10 +110,6 @@
           }
         } ],
         "responses" : {
-          "200" : {
-            "content" : { },
-            "description" : "The request was executed successfully - additional information can be found in the response body."
-          },
           "201" : {
             "content" : {
               "application/json" : {
