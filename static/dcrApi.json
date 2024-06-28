@@ -6,6 +6,9 @@
   },
   "host": "sp.auth.adobe.com",
   "basePath": "/o",
+  "schemes": [
+    "https"
+  ],
   "tags": [
     {
       "name": "client-registration-o-auth-2-controller",
@@ -125,6 +128,64 @@
     }
   },
   "definitions": {
+    "ClientRegistrationAccessTokenResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expires_in": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "token_type": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientApplication": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string"
+        },
+        "client_id_issued_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redirect_uris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ClientRegistrationRequest": {
       "type": "object",
       "required": ["redirect_uri", "software_statement"],
