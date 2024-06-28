@@ -1,32 +1,31 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "DESCRIPTION",
     "version": "2.0",
     "title": "Identity Api"
   },
   "host": "sp.auth.adobe.com",
-  "basePath": "/api/v2",
+  "basePath": "/restv2/api/v2",
   "schemes": [
     "https"
   ],
   "tags": [
     {
-      "name": "platform-identity-controller-v-2",
-      "description": "Platform Identity Controller V 2"
+      "name": "Service Token Identity Controller",
+      "description": "It can be used to handle service token."
     },
     {
-      "name": "service-token-identity-controller-v-2",
-      "description": "Service Token Identity Controller V 2"
+      "name": "Platform Identity Controller",
+      "description": "It can be used to verify service token identity."
     }
   ],
   "paths": {
     "/identities": {
       "get": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId": "verifyUsingGET_1",
+        "operationId": "verifyUsingGET",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -60,10 +59,10 @@
         }
       },
       "post": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId": "verifyUsingPOST_1",
+        "operationId": "verifyUsingPOST",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -99,10 +98,10 @@
     },
     "/identities/certificates": {
       "get": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
-        "operationId": "getCertificatesUsingGET_1",
+        "operationId": "getCertificatesUsingGET",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -138,10 +137,10 @@
     },
     "/identities/certificates/{sn}": {
       "get": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Get certificates by serial number",
         "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt platform identity payload",
-        "operationId": "getCertificateBySerialNumberUsingGET",
+        "operationId": "getCertificateBySerialNumberUsingGET_1",
         "consumes": ["application/json"],
         "produces": ["application/octet-stream"],
         "parameters": [
@@ -183,10 +182,10 @@
     },
     "/identities/servicetoken": {
       "get": {
-        "tags": ["service-token-identity-controller-v-2"],
+        "tags": ["Service Token Identity Controller"],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId": "verifyUsingGET_3",
+        "operationId": "verifyUsingGET_2",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -220,10 +219,10 @@
         }
       },
       "post": {
-        "tags": ["service-token-identity-controller-v-2"],
+        "tags": ["Service Token Identity Controller"],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId": "verifyUsingPOST_3",
+        "operationId": "verifyUsingPOST_2",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -259,7 +258,7 @@
     },
     "/identities/servicetoken/certificates": {
       "get": {
-        "tags": ["service-token-identity-controller-v-2"],
+        "tags": ["Service Token Identity Controller"],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
         "operationId": "getCertificatesUsingGET_4",
@@ -298,10 +297,10 @@
     },
     "/identities/servicetoken/certificates/{sn}": {
       "get": {
-        "tags": ["service-token-identity-controller-v-2"],
+        "tags": ["Service Token Identity Controller"],
         "summary": "Get certificates by serial number",
         "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt service token identity payload",
-        "operationId": "getCertificateBySerialNumberUsingGET_3",
+        "operationId": "getCertificateBySerialNumberUsingGET_2",
         "consumes": ["application/json"],
         "produces": ["application/octet-stream"],
         "parameters": [
@@ -343,7 +342,7 @@
     },
     "/identities/{issuer}/certificates": {
       "get": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Get certificates by issuer",
         "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner. Currently we are going to return only the first certificate in the list.",
         "operationId": "getCertificatesUsingGET_2",
@@ -391,10 +390,10 @@
     },
     "/identities/{issuer}/certificates/{sn}": {
       "get": {
-        "tags": ["platform-identity-controller-v-2"],
+        "tags": ["Platform Identity Controller"],
         "summary": "Get certificates by issuer and serial number",
         "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner andmatch a serial number.",
-        "operationId": "getCertificateUsingGET_1",
+        "operationId": "getCertificateUsingGET",
         "consumes": ["application/json"],
         "produces": ["application/octet-stream"],
         "parameters": [

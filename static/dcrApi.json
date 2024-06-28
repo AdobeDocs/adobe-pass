@@ -12,7 +12,7 @@
   "tags": [
     {
       "name": "Dynamic Client Registration",
-      "description": "It secures client communications between a programmer application or server and the Adobe Pass services"
+      "description": "It secures client communications between a programmer application or server and the Adobe Pass services."
     }
   ],
   "paths": {
@@ -126,15 +126,18 @@
       "type": "object",
       "properties": {
         "access_token": {
-          "type": "string"
+          "type": "string",
+          "description": "The access token value you should use to call the Adobe Pass APIs."
         },
         "created_at": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The issue time of the token."
         },
         "expires_in": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The time in seconds until the access_token expires."
         },
         "id": {
           "type": "string"
@@ -145,7 +148,8 @@
         "token_type": {
           "type": "string"
         }
-      }
+      },
+      "description": "Response object for client registration access token requests"
     },
     "ClientApplication": {
       "type": "object",
