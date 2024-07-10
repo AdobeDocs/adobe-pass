@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0",
+    "version": "V2",
     "title": "Identity Api"
   },
   "host": "sp.auth.adobe.com",
