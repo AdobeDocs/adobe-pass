@@ -5,7 +5,7 @@
     "title": "One Api"
   },
   "host": "sp.auth.adobe.com",
-  "basePath": "/restv2/api/v2",
+  "basePath": "/api/v2",
   "schemes": [
     "https"
   ],

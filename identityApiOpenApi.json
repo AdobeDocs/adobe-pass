@@ -5,7 +5,7 @@
     "version" : "2.0"
   },
   "servers" : [ {
-    "url" : "https://sp.auth.adobe.com/restv2/api/v2"
+    "url" : "https://sp.auth.adobe.com/api/v2"
   } ],
   "tags" : [ {
     "description" : "It can be used to handle service token.",
