@@ -2,7 +2,7 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "Identity Api",
-    "version" : "2.0"
+    "version" : "V2"
   },
   "servers" : [ {
     "url" : "https://sp.auth.adobe.com/api/v2"
