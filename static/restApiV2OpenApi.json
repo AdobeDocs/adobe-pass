@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "Rest Api",
+    "title" : "Rest API",
     "version" : "V2"
   },
   "servers" : [ {

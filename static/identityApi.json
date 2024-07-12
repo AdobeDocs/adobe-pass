@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "V2",
-    "title": "Identity Api"
+    "title": "Identity API"
   },
   "host": "sp.auth.adobe.com",
   "basePath": "/api/v2",
