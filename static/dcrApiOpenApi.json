@@ -25,7 +25,7 @@
             "type" : "string"
           }
         }, {
-          "description" : "The device information as defined in Passing Device and Connection Information",
+          "description" : "The device information as defined in [Passing](https://adobe.com) Device and Connection Information",
           "in" : "header",
           "name" : "X-Device-Info",
           "required" : true,
