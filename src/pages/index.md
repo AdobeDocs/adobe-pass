@@ -12,6 +12,12 @@ description: This is the overview page of Cat Analytics
 Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining
 whether someone who requests access to a resource is entitled to it.
 
+<InlineAlert variant="info" slots="header, text"></InlineAlert>
+
+Note
+
+The content on this page is provided for information purposes only. Usage of this API requires a current license from Adobe. No unauthorized use is permitted.
+
 <Resources slots="heading, links"></Resources>
 
 #### Resources
@@ -21,7 +27,6 @@ whether someone who requests access to a resource is entitled to it.
 ## Overview
 
 This documentation provides instructions for Adobe Pass Authentication APIs.
-
 
 ### API References
 
