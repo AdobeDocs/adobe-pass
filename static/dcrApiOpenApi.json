@@ -9,7 +9,7 @@
   } ],
   "tags" : [ {
     "description" : "It secures client communications between a programmer application or server and the Adobe Pass services.",
-    "name" : "Dynamic Client Registration"
+    "name" : "Dynamic Client Registration API"
   } ],
   "paths" : {
     "/client/register" : {
@@ -69,7 +69,7 @@
           }
         },
         "summary" : "Register client application",
-        "tags" : [ "Dynamic Client Registration" ],
+        "tags" : [ "Dynamic Client Registration API" ],
         "x-codegen-request-body-name" : "clientRegistrationRequest"
       }
     },
@@ -126,7 +126,7 @@
           }
         },
         "summary" : "Retrieve client token",
-        "tags" : [ "Dynamic Client Registration" ]
+        "tags" : [ "Dynamic Client Registration API" ]
       }
     }
   },
