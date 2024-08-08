@@ -7,7 +7,7 @@
   "servers" : [ {
     "url" : "https://sp.auth.adobe.com/api/v2"
   } ],
-  "tags" : [ {
+  "x-tags" : [ {
     "description" : "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application.",
     "name" : "3. Profiles API"
   }, {
