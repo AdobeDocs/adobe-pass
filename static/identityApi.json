@@ -6,28 +6,31 @@
   },
   "host": "sp.auth.adobe.com",
   "basePath": "/api/v2",
-  "schemes": [
-    "https"
-  ],
   "tags": [
     {
-      "name": "Service Token Identity Controller",
-      "description": "It can be used to handle service token."
+      "name": "1. Platform Identity API",
+      "description": "It can be used to verify service token identity."
     },
     {
-      "name": "Platform Identity Controller",
-      "description": "It can be used to verify service token identity."
+      "name": "2. Service Token Identity API",
+      "description": "It can be used to handle service token."
     }
   ],
   "paths": {
     "/identities": {
       "get": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
         "operationId": "verifyUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -59,12 +62,18 @@
         }
       },
       "post": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
         "operationId": "verifyUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -98,12 +107,18 @@
     },
     "/identities/certificates": {
       "get": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
-        "operationId": "getCertificatesUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getCertificatesUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -137,12 +152,18 @@
     },
     "/identities/certificates/{sn}": {
       "get": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Get certificates by serial number",
         "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt platform identity payload",
         "operationId": "getCertificateBySerialNumberUsingGET_1",
-        "consumes": ["application/json"],
-        "produces": ["application/octet-stream"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "sn",
@@ -182,12 +203,18 @@
     },
     "/identities/servicetoken": {
       "get": {
-        "tags": ["Service Token Identity Controller"],
+        "tags": [
+          "2. Service Token Identity API"
+        ],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
         "operationId": "verifyUsingGET_2",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -219,12 +246,18 @@
         }
       },
       "post": {
-        "tags": ["Service Token Identity Controller"],
+        "tags": [
+          "2. Service Token Identity API"
+        ],
         "summary": "Verify the service token identity",
         "description": "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
         "operationId": "verifyUsingPOST_2",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -258,12 +291,18 @@
     },
     "/identities/servicetoken/certificates": {
       "get": {
-        "tags": ["Service Token Identity Controller"],
+        "tags": [
+          "2. Service Token Identity API"
+        ],
         "summary": "Get certificates",
         "description": "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
-        "operationId": "getCertificatesUsingGET_4",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getCertificatesUsingGET_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -297,12 +336,18 @@
     },
     "/identities/servicetoken/certificates/{sn}": {
       "get": {
-        "tags": ["Service Token Identity Controller"],
+        "tags": [
+          "2. Service Token Identity API"
+        ],
         "summary": "Get certificates by serial number",
         "description": "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt service token identity payload",
         "operationId": "getCertificateBySerialNumberUsingGET_2",
-        "consumes": ["application/json"],
-        "produces": ["application/octet-stream"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "sn",
@@ -342,12 +387,18 @@
     },
     "/identities/{issuer}/certificates": {
       "get": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Get certificates by issuer",
         "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner. Currently we are going to return only the first certificate in the list.",
         "operationId": "getCertificatesUsingGET_2",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "issuer",
@@ -390,12 +441,18 @@
     },
     "/identities/{issuer}/certificates/{sn}": {
       "get": {
-        "tags": ["Platform Identity Controller"],
+        "tags": [
+          "1. Platform Identity API"
+        ],
         "summary": "Get certificates by issuer and serial number",
         "description": "Exposes the certificates which can be used to encrypt platform identity issued by a partner andmatch a serial number.",
-        "operationId": "getCertificateUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["application/octet-stream"],
+        "operationId": "getCertificateUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "issuer",
