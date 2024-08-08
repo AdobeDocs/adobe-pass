@@ -8,11 +8,11 @@
     "url" : "https://sp.auth.adobe.com/api/v2"
   } ],
   "tags" : [ {
-    "description" : "It can be used to handle service token.",
-    "name" : "Service Token Identity Controller"
-  }, {
     "description" : "It can be used to verify service token identity.",
-    "name" : "Platform Identity Controller"
+    "name" : "1. Platform Identity API"
+  }, {
+    "description" : "It can be used to handle service token.",
+    "name" : "2. Service Token Identity API"
   } ],
   "paths" : {
     "/identities" : {
@@ -59,7 +59,7 @@
           }
         },
         "summary" : "Verify the service token identity",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       },
       "post" : {
         "description" : "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
@@ -104,13 +104,13 @@
           }
         },
         "summary" : "Verify the service token identity",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       }
     },
     "/identities/certificates" : {
       "get" : {
         "description" : "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
-        "operationId" : "getCertificatesUsingGET",
+        "operationId" : "getCertificatesUsingGET_1",
         "responses" : {
           "200" : {
             "content" : {
@@ -151,7 +151,7 @@
           }
         },
         "summary" : "Get certificates",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       }
     },
     "/identities/certificates/{sn}" : {
@@ -204,7 +204,7 @@
           }
         },
         "summary" : "Get certificates by serial number",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       }
     },
     "/identities/servicetoken" : {
@@ -251,7 +251,7 @@
           }
         },
         "summary" : "Verify the service token identity",
-        "tags" : [ "Service Token Identity Controller" ]
+        "tags" : [ "2. Service Token Identity API" ]
       },
       "post" : {
         "description" : "Checks if the received service token identity (via the AD-Service-Token header) is valid and returns information extracted from the jwt payload",
@@ -296,13 +296,13 @@
           }
         },
         "summary" : "Verify the service token identity",
-        "tags" : [ "Service Token Identity Controller" ]
+        "tags" : [ "2. Service Token Identity API" ]
       }
     },
     "/identities/servicetoken/certificates" : {
       "get" : {
         "description" : "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
-        "operationId" : "getCertificatesUsingGET_4",
+        "operationId" : "getCertificatesUsingGET_5",
         "responses" : {
           "200" : {
             "content" : {
@@ -343,7 +343,7 @@
           }
         },
         "summary" : "Get certificates",
-        "tags" : [ "Service Token Identity Controller" ]
+        "tags" : [ "2. Service Token Identity API" ]
       }
     },
     "/identities/servicetoken/certificates/{sn}" : {
@@ -396,7 +396,7 @@
           }
         },
         "summary" : "Get certificates by serial number",
-        "tags" : [ "Service Token Identity Controller" ]
+        "tags" : [ "2. Service Token Identity API" ]
       }
     },
     "/identities/{issuer}/certificates" : {
@@ -452,13 +452,13 @@
           }
         },
         "summary" : "Get certificates by issuer",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       }
     },
     "/identities/{issuer}/certificates/{sn}" : {
       "get" : {
         "description" : "Exposes the certificates which can be used to encrypt platform identity issued by a partner andmatch a serial number.",
-        "operationId" : "getCertificateUsingGET",
+        "operationId" : "getCertificateUsingGET_1",
         "parameters" : [ {
           "description" : "issuer",
           "in" : "path",
@@ -513,7 +513,7 @@
           }
         },
         "summary" : "Get certificates by issuer and serial number",
-        "tags" : [ "Platform Identity Controller" ]
+        "tags" : [ "1. Platform Identity API" ]
       }
     }
   },

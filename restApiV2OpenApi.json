@@ -1,30 +1,30 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "Rest API",
+    "title" : "REST API",
     "version" : "V2"
   },
   "servers" : [ {
     "url" : "https://sp.auth.adobe.com/api/v2"
   } ],
   "tags" : [ {
-    "description" : "It can be used to obtain an authorization/preauthorization decision/s for one resource.",
-    "name" : "Decision Controller"
+    "description" : "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application.",
+    "name" : "3. Profiles API"
   }, {
     "description" : "It can be used to initiate user authentication.",
-    "name" : "Sessions Controller"
-  }, {
-    "description" : "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application.",
-    "name" : "Profiles Controller"
-  }, {
-    "description" : "It can be used to retrieve the configuration associated with a particular Service Provider.",
-    "name" : "Configuration Controller"
-  }, {
-    "description" : "It deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD.",
-    "name" : "Logout Controller"
+    "name" : "2. Sessions API"
   }, {
     "description" : "It can be used to handle partner authentication.",
-    "name" : "Partner SSO Controller"
+    "name" : "6. Partner SSO API"
+  }, {
+    "description" : "It deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD.",
+    "name" : "5. Logout API"
+  }, {
+    "description" : "It can be used to obtain an authorization/preauthorization decision/s for one resource.",
+    "name" : "4. Decision API"
+  }, {
+    "description" : "It can be used to retrieve the configuration associated with a particular Service Provider.",
+    "name" : "1. Configuration API"
   } ],
   "paths" : {
     "/authenticate/{serviceProvider}/{code}" : {
@@ -93,7 +93,7 @@
           }
         },
         "summary" : "Start authentication session",
-        "tags" : [ "Sessions Controller" ]
+        "tags" : [ "2. Sessions API" ]
       }
     },
     "/{serviceProvider}/configuration" : {
@@ -205,7 +205,7 @@
           }
         },
         "summary" : "Retrieve configuration for specific service provider",
-        "tags" : [ "Configuration Controller" ]
+        "tags" : [ "1. Configuration API" ]
       }
     },
     "/{serviceProvider}/decisions/authorize/{mvpd}" : {
@@ -361,7 +361,7 @@
           }
         },
         "summary" : "Retrieve authorization decisions using specific MVPD",
-        "tags" : [ "Decision Controller" ],
+        "tags" : [ "4. Decision API" ],
         "x-codegen-request-body-name" : "resources"
       }
     },
@@ -518,7 +518,7 @@
           }
         },
         "summary" : "Retrieve preauthorization decisions using specific MVPD",
-        "tags" : [ "Decision Controller" ],
+        "tags" : [ "4. Decision API" ],
         "x-codegen-request-body-name" : "resources"
       }
     },
@@ -653,7 +653,7 @@
           }
         },
         "summary" : "Initiate logout for all authenticated profiles of specific MVPD",
-        "tags" : [ "Logout Controller" ]
+        "tags" : [ "5. Logout API" ]
       }
     },
     "/{serviceProvider}/profiles" : {
@@ -772,13 +772,154 @@
           }
         },
         "summary" : "Retrieve authenticated profiles",
-        "tags" : [ "Profiles Controller" ]
+        "tags" : [ "3. Profiles API" ]
+      }
+    },
+    "/{serviceProvider}/profiles/code/{code}" : {
+      "get" : {
+        "description" : "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective code provided as a path parameter.",
+        "operationId" : "getProfileForCodeUsingGET_1",
+        "parameters" : [ {
+          "description" : "The registration code obtained after starting authentication on the primary device",
+          "in" : "path",
+          "name" : "code",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The internal unique identifier associated with a Service Provider during on-boarding process.",
+          "in" : "path",
+          "name" : "serviceProvider",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+          "in" : "header",
+          "name" : "Authorization",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The application device identifier as described in AP-Device-Identifier.",
+          "in" : "header",
+          "name" : "AP-Device-Identifier",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+          "in" : "header",
+          "name" : "X-Device-Info",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+          "in" : "header",
+          "name" : "X-Forwarded-For",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+          "in" : "header",
+          "name" : "Adobe-Subject-Token",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+          "in" : "header",
+          "name" : "AD-Service-Token",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+          "in" : "header",
+          "name" : "AP-SDK-Identifier",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
+          "in" : "header",
+          "name" : "AP-Subject-Token",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The media type accepted by the client application. If specified it must always be application/json.",
+          "in" : "header",
+          "name" : "Accept",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+          "in" : "header",
+          "name" : "Content-Type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The user agent of the client application.",
+          "in" : "header",
+          "name" : "User-Agent",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProfilesResponse"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "302" : {
+            "content" : { },
+            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+          },
+          "401" : {
+            "content" : { },
+            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+          }
+        },
+        "summary" : "Retrieve authenticated profiles for specific code\n",
+        "tags" : [ "3. Profiles API" ]
       }
     },
     "/{serviceProvider}/profiles/sso/{partner}" : {
       "post" : {
         "description" : "The partner SSO application sends the mvpd profile information and Pass server saves the profile information in order to use it for decisions calls.",
-        "operationId" : "createPartnerProfileUsingPOST_1",
+        "operationId" : "createPartnerProfileUsingPOST",
         "parameters" : [ {
           "description" : "The name of the partner (e.g. Apple) providing the sso framework that is integrated with Pass flows.",
           "in" : "path",
@@ -890,7 +1031,7 @@
           }
         },
         "summary" : "Retrieve authenticated profile using partner authentication response",
-        "tags" : [ "Partner SSO Controller" ],
+        "tags" : [ "6. Partner SSO API" ],
         "x-codegen-request-body-name" : "SAMLResponse"
       }
     },
@@ -1025,142 +1166,7 @@
           }
         },
         "summary" : "Retrieve authenticated profiles for specific MVPD",
-        "tags" : [ "Profiles Controller" ]
-      }
-    },
-    "/{serviceProvider}/profiles/{mvpd}/{code}" : {
-      "get" : {
-        "description" : "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application, mvpd and specific registration code provided as a path parameter.",
-        "operationId" : "getProfileForMvpdAndForCodeUsingGET",
-        "parameters" : [ {
-          "description" : "The registration code obtained after starting authentication on the primary device",
-          "in" : "path",
-          "name" : "code",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The internal unique identifier associated with an Identity Provider during on-boarding process.",
-          "in" : "path",
-          "name" : "mvpd",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The internal unique identifier associated with a Service Provider during on-boarding process.",
-          "in" : "path",
-          "name" : "serviceProvider",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
-          "in" : "header",
-          "name" : "Authorization",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The application device identifier as described in AP-Device-Identifier.",
-          "in" : "header",
-          "name" : "AP-Device-Identifier",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
-          "in" : "header",
-          "name" : "X-Device-Info",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-          "in" : "header",
-          "name" : "X-Forwarded-For",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-          "in" : "header",
-          "name" : "Adobe-Subject-Token",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-          "in" : "header",
-          "name" : "AD-Service-Token",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-          "in" : "header",
-          "name" : "AP-SDK-Identifier",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The media type accepted by the client application. If specified it must always be application/json.",
-          "in" : "header",
-          "name" : "Accept",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The user agent of the client application.",
-          "in" : "header",
-          "name" : "User-Agent",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ProfilesResponse"
-                }
-              }
-            },
-            "description" : "OK"
-          },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
-          "400" : {
-            "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
-          },
-          "401" : {
-            "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
-          }
-        },
-        "summary" : "Retrieve authenticated profiles for specific MVPD and specific code\n",
-        "tags" : [ "Profiles Controller" ]
+        "tags" : [ "3. Profiles API" ]
       }
     },
     "/{serviceProvider}/sessions" : {
@@ -1302,7 +1308,7 @@
           }
         },
         "summary" : "Create authentication session",
-        "tags" : [ "Sessions Controller" ]
+        "tags" : [ "2. Sessions API" ]
       }
     },
     "/{serviceProvider}/sessions/sso/{partner}" : {
@@ -1440,13 +1446,13 @@
           }
         },
         "summary" : "Retrieve partner authentication request",
-        "tags" : [ "Partner SSO Controller" ]
+        "tags" : [ "6. Partner SSO API" ]
       }
     },
     "/{serviceProvider}/sessions/{code}" : {
       "get" : {
-        "description" : "Retrieve information for existing authentication session using registration code",
-        "operationId" : "getSessionStatusUsingGET_1",
+        "description" : "Retrieve information for existing authentication session using code",
+        "operationId" : "getSessionStatusUsingGET",
         "parameters" : [ {
           "description" : "The registration code obtained after starting authentication on the primary device",
           "in" : "path",
@@ -1553,11 +1559,11 @@
           }
         },
         "summary" : "Retrieve authentication session using code",
-        "tags" : [ "Sessions Controller" ]
+        "tags" : [ "2. Sessions API" ]
       },
       "post" : {
-        "description" : " Continue / update authentication for existing authentication session using registration code",
-        "operationId" : "resumeSessionUsingPOST_1",
+        "description" : " Continue / update authentication for existing authentication session using code",
+        "operationId" : "resumeSessionUsingPOST",
         "parameters" : [ {
           "description" : "The registration code obtained after starting authentication on the primary device",
           "in" : "path",
@@ -1694,7 +1700,7 @@
           }
         },
         "summary" : "Resume authentication session",
-        "tags" : [ "Sessions Controller" ]
+        "tags" : [ "2. Sessions API" ]
       }
     }
   },
