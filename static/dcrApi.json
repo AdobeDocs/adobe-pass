@@ -6,24 +6,27 @@
   },
   "host": "sp.auth.adobe.com",
   "basePath": "/o",
-  "schemes": [
-    "https"
-  ],
   "tags": [
     {
-      "name": "Dynamic Client Registration",
+      "name": "Dynamic Client Registration API",
       "description": "It secures client communications between a programmer application or server and the Adobe Pass services."
     }
   ],
   "paths": {
     "/client/register": {
       "post": {
-        "tags": ["Dynamic Client Registration"],
+        "tags": [
+          "Dynamic Client Registration API"
+        ],
         "summary": "Register client application",
         "description": "Get client credentials for a software statement and get scopes information",
         "operationId": "processSoftwareStatementUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "Content-Type",
@@ -71,12 +74,18 @@
     },
     "/client/token": {
       "post": {
-        "tags": ["Dynamic Client Registration"],
+        "tags": [
+          "Dynamic Client Registration API"
+        ],
         "summary": "Retrieve client token",
         "description": "Get access token for a pair of client credentials",
         "operationId": "generateAccessTokenUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "client_id",
@@ -186,7 +195,10 @@
     },
     "ClientRegistrationRequest": {
       "type": "object",
-      "required": ["redirect_uri", "software_statement"],
+      "required": [
+        "redirect_uri",
+        "software_statement"
+      ],
       "properties": {
         "software_statement": {
           "type": "string"
