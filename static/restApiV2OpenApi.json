@@ -7,24 +7,24 @@
   "servers" : [ {
     "url" : "https://sp.auth.adobe.com/api/v2"
   } ],
-  "x-tagsGroups" : [ {
+  "tags" : [ {
     "description" : "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application.",
-    "name" : "Profiles API"
+    "name" : "3. Profiles API"
   }, {
     "description" : "It can be used to initiate user authentication.",
-    "name" : "Sessions API"
+    "name" : "2. Sessions API"
   }, {
     "description" : "It can be used to handle partner authentication.",
-    "name" : "Partner SSO API"
+    "name" : "6. Partner SSO API"
   }, {
     "description" : "It deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD.",
-    "name" : "Logout API"
+    "name" : "5. Logout API"
   }, {
     "description" : "It can be used to obtain an authorization/preauthorization decision/s for one resource.",
-    "name" : "Decision API"
+    "name" : "4. Decision API"
   }, {
     "description" : "It can be used to retrieve the configuration associated with a particular Service Provider.",
-    "name" : "Configuration API"
+    "name" : "1. Configuration API"
   } ],
   "paths" : {
     "/authenticate/{serviceProvider}/{code}" : {
