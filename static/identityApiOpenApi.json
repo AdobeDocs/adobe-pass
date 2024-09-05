@@ -18,7 +18,7 @@
     "/identities" : {
       "get" : {
         "description" : "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId" : "verifyUsingGET",
+        "operationId" : "verifyUsingGET_1",
         "responses" : {
           "200" : {
             "content" : {
@@ -33,29 +33,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Verify the service token identity",
@@ -63,7 +55,7 @@
       },
       "post" : {
         "description" : "Checks if the received service token identity (via the Adobe-Subject-Token header) is valid and returns information extracted from the jwt payload",
-        "operationId" : "verifyUsingPOST",
+        "operationId" : "verifyUsingPOST_1",
         "responses" : {
           "200" : {
             "content" : {
@@ -78,29 +70,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Verify the service token identity",
@@ -110,7 +94,7 @@
     "/identities/certificates" : {
       "get" : {
         "description" : "Returns the full list of public certificates that can be used to encrypt the jwt platform identity payload",
-        "operationId" : "getCertificatesUsingGET_1",
+        "operationId" : "getCertificatesUsingGET",
         "responses" : {
           "200" : {
             "content" : {
@@ -125,29 +109,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates",
@@ -178,29 +154,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates by serial number",
@@ -225,29 +193,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Verify the service token identity",
@@ -270,29 +230,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Verify the service token identity",
@@ -302,7 +254,7 @@
     "/identities/servicetoken/certificates" : {
       "get" : {
         "description" : "Returns the full list of public certificates that can be used to encrypt the jwt service token identity payload",
-        "operationId" : "getCertificatesUsingGET_5",
+        "operationId" : "getCertificatesUsingGET_4",
         "responses" : {
           "200" : {
             "content" : {
@@ -317,29 +269,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates",
@@ -349,7 +293,7 @@
     "/identities/servicetoken/certificates/{sn}" : {
       "get" : {
         "description" : "Returns the list of public certificates matching a serial number that can be used to encrypt the jwt service token identity payload",
-        "operationId" : "getCertificateBySerialNumberUsingGET_2",
+        "operationId" : "getCertificateBySerialNumberUsingGET_3",
         "parameters" : [ {
           "description" : "sn",
           "in" : "path",
@@ -370,29 +314,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates by serial number",
@@ -402,7 +338,7 @@
     "/identities/{issuer}/certificates" : {
       "get" : {
         "description" : "Exposes the certificates which can be used to encrypt platform identity issued by a partner. Currently we are going to return only the first certificate in the list.",
-        "operationId" : "getCertificatesUsingGET_2",
+        "operationId" : "getCertificatesUsingGET_3",
         "parameters" : [ {
           "description" : "issuer",
           "in" : "path",
@@ -426,29 +362,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates by issuer",
@@ -487,29 +415,21 @@
             },
             "description" : "OK"
           },
-          "302" : {
-            "content" : { },
-            "description" : "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404" : {
-            "content" : { },
-            "description" : "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405" : {
-            "content" : { },
-            "description" : "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500" : {
             "content" : { },
-            "description" : "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         },
         "summary" : "Get certificates by issuer and serial number",
