@@ -8,38 +8,37 @@
   "basePath": "/api/v2",
   "tags": [
     {
-      "name": "3. Profiles API",
-      "description": "It can be used to obtain information about authenticated profiles found in the Adobe Pass Authentication services for the respective device and application."
+      "name": "2. Sessions",
+      "description": "Create authentication sessions"
     },
     {
-      "name": "2. Sessions API",
-      "description": "It can be used to initiate user authentication."
+      "name": "6. Partner Single Sign-On",
+      "description": "Handle partner authentication"
     },
     {
-      "name": "6. Partner SSO API",
-      "description": "It can be used to handle partner authentication."
+      "name": "5. Logout",
+      "description": "Delete authenticated profiles"
     },
     {
-      "name": "5. Logout API",
-      "description": "It deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD."
+      "name": "3. Profiles",
+      "description": "Obtain information about authenticated profiles"
     },
     {
-      "name": "4. Decision API",
-      "description": "It can be used to obtain an authorization/preauthorization decision/s for one resource."
+      "name": "1. Configuration",
+      "description": "Retrieve the configuration associated with the Service Provider"
     },
     {
-      "name": "1. Configuration API",
-      "description": "It can be used to retrieve the configuration associated with a particular Service Provider."
+      "name": "4. Decisions",
+      "description": "Obtain informative/authoritative decisions"
     }
   ],
   "paths": {
     "/authenticate/{serviceProvider}/{code}": {
       "get": {
         "tags": [
-          "2. Sessions API"
+          "2. Sessions"
         ],
-        "summary": "Start authentication session",
-        "description": "Perform authentication in user agent",
+        "summary": "Perform authentication in user agent",
         "operationId": "startAuthenticationUsingGET",
         "consumes": [
           "application/json"
@@ -51,22 +50,15 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The registration code obtained after starting authentication on the primary device",
+            "description": "The authentication code obtained after creating the authentication session on the streaming device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
             "type": "string"
           },
           {
@@ -81,23 +73,17 @@
           "200": {
             "description": "OK"
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
-          },
-          "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "302": {
+            "description": "Found. The response body contains a location redirect to continue the flow until reaching the MVPD login page"
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -105,11 +91,10 @@
     "/{serviceProvider}/configuration": {
       "get": {
         "tags": [
-          "1. Configuration API"
+          "1. Configuration"
         ],
         "summary": "Retrieve configuration for specific service provider",
-        "description": "The Configuration API can be used to retrieve the configuration associated with a particular Service Provider.",
-        "operationId": "handleRequestUsingGET_1",
+        "operationId": "handleRequestUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -120,56 +105,49 @@
           {
             "name": "profile",
             "in": "query",
-            "description": "Provide profile id",
+            "description": "-",
             "required": false,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -183,28 +161,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a list of MVPDs having an active integration with the 'serviceProvider'.",
             "schema": {
               "$ref": "#/definitions/ConfigurationResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -212,10 +184,9 @@
     "/{serviceProvider}/decisions/authorize/{mvpd}": {
       "post": {
         "tags": [
-          "4. Decision API"
+          "4. Decisions"
         ],
         "summary": "Retrieve authorization decisions using specific MVPD",
-        "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
         "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
         "consumes": [
           "application/json"
@@ -227,14 +198,14 @@
           {
             "name": "mvpd",
             "in": "path",
-            "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "resources",
-            "description": "A list of resourceIds that identifies the content that might be accessible to a user and is recognized by MVPD authorization endpoints.",
+            "description": "The list of resources that require an MVPD decision before they can be played.",
             "required": true,
             "schema": {
               "type": "array",
@@ -246,112 +217,106 @@
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-Temppass-Identity",
+            "in": "header",
+            "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "The user agent of the client application.",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a list of decisions with additional information.",
             "schema": {
               "$ref": "#/definitions/DecisionsResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -359,11 +324,10 @@
     "/{serviceProvider}/decisions/preauthorize/{mvpd}": {
       "post": {
         "tags": [
-          "4. Decision API"
+          "4. Decisions"
         ],
         "summary": "Retrieve preauthorization decisions using specific MVPD",
-        "description": "In order to perform the preauthorization flow, a valid authenticated profile must be found in the backend for the specified MVPD. If there is no authenticated profile found in the backend for the specified MVPD, then a validation error is returned in the response body, as described in Public APIs - Error codes.",
-        "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
+        "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -374,14 +338,14 @@
           {
             "name": "mvpd",
             "in": "path",
-            "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "resources",
-            "description": "A list of resourceIds that identifies the content that might be accessible to a user and is recognized by MVPD authorization endpoints.",
+            "description": "The list of resources that require an MVPD decision before they can be played.",
             "required": true,
             "schema": {
               "type": "array",
@@ -393,112 +357,106 @@
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-Temppass-Identity",
+            "in": "header",
+            "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "The user agent of the client application.",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a list of decisions with additional information.",
             "schema": {
               "$ref": "#/definitions/DecisionsResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -506,10 +464,9 @@
     "/{serviceProvider}/logout/{mvpd}": {
       "get": {
         "tags": [
-          "5. Logout API"
+          "5. Logout"
         ],
-        "summary": "Initiate logout for all authenticated profiles of specific MVPD",
-        "description": "The logout service performs the following: deletes the authenticated profiles found in the backend for the specific device, client application and specified MVPD returns a list of actions the client application must perform in order to finalize the logout flow for the authenticated profile with specified MVPD",
+        "summary": "Initiate logout for specific MVPD",
         "operationId": "getLogoutForMvpdUsingGET",
         "consumes": [
           "application/json"
@@ -521,77 +478,70 @@
           {
             "name": "mvpd",
             "in": "path",
-            "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "redirectUrl",
             "in": "query",
-            "description": "The final redirect url where the programmer application navigates to when the logout final is completed with the mvpd. This parameter needs to be included when the programmer application initiates the logout flow with the mvpd using the \"url\" attribute received in OneAPI logout response.",
+            "description": "The final redirect URL to which the user agent navigates when the logout flow for the MVPD is completed.\n\nThe value must be URL-encoded.",
             "required": false,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -605,28 +555,25 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.",
             "schema": {
               "$ref": "#/definitions/LogoutResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "302": {
+            "description": "Found. The response body contains a location redirect to continue the flow until reaching the MVPD login page"
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -634,11 +581,10 @@
     "/{serviceProvider}/profiles": {
       "get": {
         "tags": [
-          "3. Profiles API"
+          "3. Profiles"
         ],
-        "summary": "Retrieve authenticated profiles",
-        "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device and application, each authenticated profile representing an authenticated user with a specific MVPD",
-        "operationId": "getProfilesUsingGET_1",
+        "summary": "Retrieve profiles",
+        "operationId": "getProfilesUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -649,63 +595,63 @@
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -719,28 +665,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a map of valid profiles, which may be empty.",
             "schema": {
               "$ref": "#/definitions/ProfilesResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -748,10 +688,9 @@
     "/{serviceProvider}/profiles/code/{code}": {
       "get": {
         "tags": [
-          "3. Profiles API"
+          "3. Profiles"
         ],
-        "summary": "Retrieve authenticated profiles for specific code\n",
-        "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective code provided as a path parameter.",
+        "summary": "Retrieve profiles for specific code",
         "operationId": "getProfileForCodeUsingGET_1",
         "consumes": [
           "application/json"
@@ -763,84 +702,35 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The registration code obtained after starting authentication on the primary device",
+            "description": "The authentication code obtained after creating the authentication session on the streaming device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "AP-Device-Identifier",
-            "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "X-Device-Info",
-            "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Adobe-Subject-Token",
-            "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AD-Service-Token",
-            "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -854,28 +744,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a map of valid profiles, which may be empty.",
             "schema": {
               "$ref": "#/definitions/ProfilesResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -883,10 +767,9 @@
     "/{serviceProvider}/profiles/sso/{partner}": {
       "post": {
         "tags": [
-          "6. Partner SSO API"
+          "6. Partner Single Sign-On"
         ],
-        "summary": "Retrieve authenticated profile using partner authentication response",
-        "description": "The partner SSO application sends the mvpd profile information and Pass server saves the profile information in order to use it for decisions calls.",
+        "summary": "Retrieve profile using partner authentication response",
         "operationId": "createPartnerProfileUsingPOST",
         "consumes": [
           "application/x-www-form-urlencoded"
@@ -898,14 +781,14 @@
           {
             "name": "partner",
             "in": "path",
-            "description": "The name of the partner (e.g. Apple) providing the sso framework that is integrated with Pass flows.",
+            "description": "The name of the partner (e.g., Apple) that provides the single sign-on framework integrated with Adobe Pass Authentication flows.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "SAMLResponse",
-            "description": "The Platform SSO profile response containing the needed user metadata for creating a valid authentication token.",
+            "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
             "required": true,
             "schema": {
               "type": "string"
@@ -914,77 +797,85 @@
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/x-www-form-urlencoded.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
+            "required": false,
             "type": "string"
           },
           {
-            "name": "AP-SDK-Identifier",
+            "name": "Accept",
             "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "The user agent of the client application.",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a map of valid profiles, which may be empty.",
             "schema": {
               "$ref": "#/definitions/ProfilesResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -992,11 +883,10 @@
     "/{serviceProvider}/profiles/{mvpd}": {
       "get": {
         "tags": [
-          "3. Profiles API"
+          "3. Profiles"
         ],
-        "summary": "Retrieve authenticated profiles for specific MVPD",
-        "description": "The profiles service performs the following: returns the authenticated profiles found in the Adobe Primetime Authentication backend for the respective device, application and specific MVPD provided as a path parameter.",
-        "operationId": "getProfileForMvpdUsingGET",
+        "summary": "Retrieve profiles for specific MVPD",
+        "operationId": "getProfileForMvpdUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -1007,70 +897,77 @@
           {
             "name": "mvpd",
             "in": "path",
-            "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
+            "required": false,
             "type": "string"
           },
           {
-            "name": "AP-SDK-Identifier",
+            "name": "AP-Temppass-Identity",
             "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -1080,39 +977,26 @@
             "description": "The user agent of the client application.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "AP-TempPass-Identity",
-            "in": "header",
-            "description": "The application user information as specified in Flexible Temporary Pass Identity.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains a map of valid profiles, which may be empty.",
             "schema": {
               "$ref": "#/definitions/ProfilesResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -1120,10 +1004,9 @@
     "/{serviceProvider}/sessions": {
       "post": {
         "tags": [
-          "2. Sessions API"
+          "2. Sessions"
         ],
         "summary": "Create authentication session",
-        "description": "In order to initiate the authentication session from a primary device only a valid serviceProvider parameter value must be provided, while the mvpd, domainName and redirectUrl parameter values may be provided in a later call.",
         "operationId": "createSessionUsingPOST",
         "consumes": [
           "application/x-www-form-urlencoded"
@@ -1135,98 +1018,84 @@
           {
             "name": "mvpd",
             "in": "formData",
-            "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing mvpd login.",
+            "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "redirectUrl",
             "in": "formData",
-            "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded.",
+            "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/x-www-form-urlencoded.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Adobe-Subject-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
+            "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "AD-Service-Token",
             "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-Subject-Token",
-            "in": "header",
-            "description": "The end-user platform identity as specified in Platform requirements for Adobe SSO.",
+            "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -1240,28 +1109,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains information about the next actions to perform authentication.",
             "schema": {
               "$ref": "#/definitions/SessionResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -1269,11 +1132,10 @@
     "/{serviceProvider}/sessions/sso/{partner}": {
       "post": {
         "tags": [
-          "6. Partner SSO API"
+          "6. Partner Single Sign-On"
         ],
         "summary": "Retrieve partner authentication request",
-        "description": "This endpoint returns a verification code which is essentially the authentication request. The format should follow the general rules of the OneAPI endpoints so it is a json-formatted body. For degraded integrations, return a json response indicating that the integration is degraded and the next call should be the one in /decisions endpoint.",
-        "operationId": "retrieveVerificationTokenUsingPOST_1",
+        "operationId": "retrieveVerificationTokenUsingPOST",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -1284,84 +1146,77 @@
           {
             "name": "partner",
             "in": "path",
-            "description": "The name of the partner (e.g. Apple) providing the sso framework that is integrated with Pass flows.",
+            "description": "The name of the partner (e.g., Apple) that provides the single sign-on framework integrated with Adobe Pass Authentication flows.",
             "required": true,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing mvpd login.",
+            "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": true,
             "type": "string"
           },
           {
             "name": "redirectUrl",
             "in": "formData",
-            "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded.",
+            "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": true,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/x-www-form-urlencoded.",
             "required": true,
             "type": "string"
           },
           {
             "name": "AP-Device-Identifier",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
+            "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Device-Info",
             "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "AP-Partner-Framework-Status",
             "in": "header",
-            "description": "The Base64-encoded payload containing the partner framework status.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -1375,28 +1230,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains information about the next actions to perform authentication.",
             "schema": {
               "$ref": "#/definitions/SessionResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
@@ -1404,10 +1253,9 @@
     "/{serviceProvider}/sessions/{code}": {
       "get": {
         "tags": [
-          "2. Sessions API"
+          "2. Sessions"
         ],
         "summary": "Retrieve authentication session using code",
-        "description": "Retrieve information for existing authentication session using code",
         "operationId": "getSessionStatusUsingGET",
         "consumes": [
           "application/json"
@@ -1419,56 +1267,35 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The registration code obtained after starting authentication on the primary device",
+            "description": "The authentication code obtained after creating the authentication session on the streaming device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "AP-Device-Identifier",
-            "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "X-Device-Info",
-            "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -1482,37 +1309,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains information about the authentication session.",
             "schema": {
               "$ref": "#/definitions/SessionStatusResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       },
       "post": {
         "tags": [
-          "2. Sessions API"
+          "2. Sessions"
         ],
         "summary": "Resume authentication session",
-        "description": " Continue / update authentication for existing authentication session using code",
         "operationId": "resumeSessionUsingPOST",
         "consumes": [
           "application/x-www-form-urlencoded"
@@ -1524,98 +1344,63 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The registration code obtained after starting authentication on the primary device",
+            "description": "The authentication code obtained after creating the authentication session on the streaming device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "mvpd",
             "in": "formData",
-            "description": "The MVPD identifier associated with the end-user's subscription.If device platform has limitations in providing a value, then the application will have to resume the authentication session later on and provide a valid value.",
+            "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "domainName",
             "in": "formData",
-            "description": "The originating domain of the application performing mvpd login.",
+            "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "redirectUrl",
             "in": "formData",
-            "description": "The url where the client application is redirected to when authentication is completed. The value must be URL encoded.",
+            "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
             "required": false,
             "type": "string"
           },
           {
             "name": "serviceProvider",
             "in": "path",
-            "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+            "description": "The internal unique identifier associated with the Service Provider during onboarding process.",
             "required": true,
             "type": "string"
           },
           {
             "name": "Authorization",
             "in": "header",
-            "description": "The authorization header containing OAuth2 access token obtained through dynamic client registration process.",
+            "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "AP-Device-Identifier",
+            "name": "Content-Type",
             "in": "header",
-            "description": "The application device identifier as described in AP-Device-Identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "X-Device-Info",
-            "in": "header",
-            "description": "Strongly recommended to use it always when the application's device platform allows to provide valid values explicitly.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/x-www-form-urlencoded.",
             "required": true,
             "type": "string"
           },
           {
             "name": "X-Forwarded-For",
             "in": "header",
-            "description": "The Streaming Device IP address. Must use it only for Server-to-Server implementations when the call is made by the Programmer Service and not the Streaming Device, while for Client-to-Server implementations, the Streaming Device IP address is implicitly sent.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Adobe-Subject-Token",
-            "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Platform Identity method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AD-Service-Token",
-            "in": "header",
-            "description": "The Adobe Pass Authentication backend application can also make use of authenticated profiles obtained through Single Sign-On using Service Token method",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "AP-SDK-Identifier",
-            "in": "header",
-            "description": "The SDK identifier as specified in AP-SDK-Identifier. Must use it only by an Adobe Primetime Authentication SDK.",
+            "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
             "required": false,
             "type": "string"
           },
           {
             "name": "Accept",
             "in": "header",
-            "description": "The media type accepted by the client application. If specified it must always be application/json.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "The media type accepted by the Adobe Primetime Authentication backend application. If specified it must always be application/json.",
+            "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json.",
             "required": false,
             "type": "string"
           },
@@ -1629,28 +1414,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains information about the next actions to perform authentication.",
             "schema": {
               "$ref": "#/definitions/SessionResponse"
             }
           },
-          "302": {
-            "description": "Redirect. The response contains a location redirect to continue the flow until reaching the MVPD login page."
-          },
           "400": {
-            "description": "Bad request. The request was invalid. Check the JSON-based error information provided in the response body."
+            "description": "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
           },
           "401": {
-            "description": "Unauthorized. The access token is not valid, the client application needs to obtain a new one using the information from dynamic client registration process."
-          },
-          "404": {
-            "description": "Not found. There is no authentication session found on Adobe Primetime Authentication backend."
-          },
-          "405": {
-            "description": "Method not allowed.The client tried to use an HTTP methods that the specified resource doesn't allow."
+            "description": "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
           },
           "500": {
-            "description": "Internal Server Error. Something is broken on Adobe Primetime Authentication services side. The JSON-based error information provided in the response body will explain further."
+            "description": "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+          },
+          "405": {
+            "description": "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
           }
         }
       }
