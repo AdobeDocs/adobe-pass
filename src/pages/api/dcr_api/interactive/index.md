@@ -1,6 +1,7 @@
 ---
 title: DCR API Spec
 description: DCR API Spec
+layout: none
 ---
 
 <InlineAlert variant="warning" slots="header, text"></InlineAlert>
