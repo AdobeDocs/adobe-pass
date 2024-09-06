@@ -59,21 +59,21 @@
             "content" : { },
             "description" : "OK"
           },
-          "400" : {
-            "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
-          },
           "302" : {
             "content" : { },
-            "description" : "Found. The response body contains a location redirect to continue the flow until reaching the MVPD login page"
+            "description" : "Found. <summary>The response body contains a location redirect to continue the flow until reaching the MVPD login page<summary>"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Perform authentication in user agent",
@@ -82,7 +82,7 @@
     },
     "/{serviceProvider}/configuration" : {
       "get" : {
-        "operationId" : "handleRequestUsingGET",
+        "operationId" : "handleRequestUsingGET_1",
         "parameters" : [ {
           "description" : "-",
           "in" : "query",
@@ -153,23 +153,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a list of MVPDs having an active integration with the 'serviceProvider'."
+            "description" : "OK. <summary>The response body contains a list of MVPDs having an active integration with the 'serviceProvider'.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve configuration for specific service provider",
@@ -300,23 +300,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a list of decisions with additional information."
+            "description" : "OK. <summary>The response body contains a list of decisions with additional information.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve authorization decisions using specific MVPD",
@@ -326,7 +326,7 @@
     },
     "/{serviceProvider}/decisions/preauthorize/{mvpd}" : {
       "post" : {
-        "operationId" : "retrievePreAuthorizeDecisionsForMvpdUsingPOST_1",
+        "operationId" : "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.",
           "in" : "path",
@@ -448,23 +448,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a list of decisions with additional information."
+            "description" : "OK. <summary>The response body contains a list of decisions with additional information.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve preauthorization decisions using specific MVPD",
@@ -474,7 +474,7 @@
     },
     "/{serviceProvider}/logout/{mvpd}" : {
       "get" : {
-        "operationId" : "getLogoutForMvpdUsingGET",
+        "operationId" : "getLogoutForMvpdUsingGET_1",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.",
           "in" : "path",
@@ -567,27 +567,27 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile."
-          },
-          "400" : {
-            "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
-          },
-          "401" : {
-            "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>"
           },
           "302" : {
             "content" : { },
-            "description" : "Found. The response body contains a location redirect to continue the flow until reaching the MVPD login page"
+            "description" : "Found. <summary>The response body contains a location redirect to continue the flow until reaching the MVPD login page<summary>"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
+          },
+          "401" : {
+            "content" : { },
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Initiate logout for specific MVPD",
@@ -596,7 +596,7 @@
     },
     "/{serviceProvider}/profiles" : {
       "get" : {
-        "operationId" : "getProfilesUsingGET",
+        "operationId" : "getProfilesUsingGET_1",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Service Provider during onboarding process.",
           "in" : "path",
@@ -681,23 +681,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a map of valid profiles, which may be empty."
+            "description" : "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve profiles",
@@ -706,7 +706,7 @@
     },
     "/{serviceProvider}/profiles/code/{code}" : {
       "get" : {
-        "operationId" : "getProfileForCodeUsingGET_1",
+        "operationId" : "getProfileForCodeUsingGET",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",
@@ -762,23 +762,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a map of valid profiles, which may be empty."
+            "description" : "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve profiles for specific code",
@@ -885,23 +885,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a map of valid profiles, which may be empty."
+            "description" : "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve profile using partner authentication response",
@@ -911,7 +911,7 @@
     },
     "/{serviceProvider}/profiles/{mvpd}" : {
       "get" : {
-        "operationId" : "getProfileForMvpdUsingGET_1",
+        "operationId" : "getProfileForMvpdUsingGET",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.",
           "in" : "path",
@@ -1011,23 +1011,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains a map of valid profiles, which may be empty."
+            "description" : "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve profiles for specific MVPD",
@@ -1036,7 +1036,7 @@
     },
     "/{serviceProvider}/sessions" : {
       "post" : {
-        "operationId" : "createSessionUsingPOST",
+        "operationId" : "createSessionUsingPOST_1",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Service Provider during onboarding process.",
           "in" : "path",
@@ -1117,7 +1117,7 @@
           "content" : {
             "application/x-www-form-urlencoded" : {
               "schema" : {
-                "$ref" : "#/components/schemas/createSessionUsingPOST_request"
+                "$ref" : "#/components/schemas/createSessionUsingPOST_1_request"
               }
             }
           }
@@ -1131,23 +1131,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains information about the next actions to perform authentication."
+            "description" : "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Create authentication session",
@@ -1253,23 +1253,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains information about the next actions to perform authentication."
+            "description" : "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve partner authentication request",
@@ -1278,7 +1278,7 @@
     },
     "/{serviceProvider}/sessions/{code}" : {
       "get" : {
-        "operationId" : "getSessionStatusUsingGET",
+        "operationId" : "getSessionStatusUsingGET_1",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",
@@ -1334,30 +1334,30 @@
                 }
               }
             },
-            "description" : "OK. The response body contains information about the authentication session."
+            "description" : "OK. <summary>The response body contains information about the authentication session.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Retrieve authentication session using code",
         "tags" : [ "2. Sessions" ]
       },
       "post" : {
-        "operationId" : "resumeSessionUsingPOST",
+        "operationId" : "resumeSessionUsingPOST_1",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",
@@ -1416,7 +1416,7 @@
           "content" : {
             "application/x-www-form-urlencoded" : {
               "schema" : {
-                "$ref" : "#/components/schemas/createSessionUsingPOST_request"
+                "$ref" : "#/components/schemas/createSessionUsingPOST_1_request"
               }
             }
           }
@@ -1430,23 +1430,23 @@
                 }
               }
             },
-            "description" : "OK. The response body contains information about the next actions to perform authentication."
+            "description" : "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>"
           },
           "400" : {
             "content" : { },
-            "description" : "Bad request. The request is invalid, the client needs to correct the request and try again. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           },
           "401" : {
             "content" : { },
-            "description" : "Unauthorized. The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [[Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation."
-          },
-          "500" : {
-            "content" : { },
-            "description" : "Internal Server Error. The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation."
+            "description" : "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/dcr-api/dynamic-client-registration-overview) documentation.<summary>"
           },
           "405" : {
             "content" : { },
-            "description" : "Method not allowed. The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section."
+            "description" : "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>"
+          },
+          "500" : {
+            "content" : { },
+            "description" : "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/en/docs/pass/authentication/auth-features/error-reportn/enhanced-error-codes) documentation.<summary>"
           }
         },
         "summary" : "Resume authentication session",
@@ -1807,7 +1807,7 @@
         },
         "type" : "object"
       },
-      "createSessionUsingPOST_request" : {
+      "createSessionUsingPOST_1_request" : {
         "properties" : {
           "mvpd" : {
             "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
