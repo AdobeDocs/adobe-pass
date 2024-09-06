@@ -1,6 +1,7 @@
 ---
 title: REST API V2 Spec
 description: REST API V2 Spec
+layout: none
 ---
 
 <InlineAlert variant="warning" slots="header, text"></InlineAlert>
