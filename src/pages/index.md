@@ -9,121 +9,85 @@ description: This is the overview page of Cat Analytics
 
 # Adobe Pass Authentication
 
-Adobe Pass Authentication is an entitlement solution for TV Everywhere for determining whether a user is entitled to a specific resource.
+Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining whether someone who requests access to a resource is entitled to it.
+<InlineAlert variant="warning" slots="header, text"></InlineAlert>
 
-<InlineAlert variant="info" slots="header, text"></InlineAlert>
-
-Note
+Important
 
 The content on this page is provided for information purposes only. Usage of this API requires a current license from Adobe. No unauthorized use is permitted.
 
 <AnnouncementBlock slots="heading, text, button"></AnnouncementBlock>
 
-### Use the interactive API environment
+### Adobe Pass Authentication
 
-You can now interact with the Adobe Pass Authentication API endpoints directly from the API reference pages. Get an authorization through our [DCR API](api/dcr_api) and click the button below to interact with our REST API.
+Integrate the new REST API v2 to benefit from the latest Adobe Pass functionalities.
 
-[Try our REST API](api/rest_api_v2/interactive)
+[Try REST API v2](api/rest_api_v2/interactive)
 
 <Resources slots="heading, links"></Resources>
 
 #### Resources
 
-* [Adobe Pass Documentation](https://experienceleague.adobe.com/en/docs/pass/authentication/home)
-* [Adobe Pass Authentication Repository](https://github.com/AdobeDocs/adobe-pass)
+* [Adobe Pass Authentication Docs](https://experienceleague.adobe.com/en/docs/pass/authentication/home)
+* [REST API v2 APIs Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-apis-overview)
+* [REST API v2 Flows Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-flows-overview)
 
-## Overview
+## Simplify TVE Experience
 
-Adobe Pass Authentication workflows integrate entitlement systems from both Content Providers (Programmers) and Pay TV Providers (MVPDs) in order to provide a modular framework for determining whether someone who requests access to a resource is entitled to it.
+Do you want to improve the cost efficiency of your TVE applications?
 
-Below you can find links to the Adobe Pass Authentication Flows documentation and API References. For more detailed information, please refer to the documentation linked in the resources section.
+Do you want to reduce the development time and resources required to support TVE applications on multiple platforms?
 
-## Discover
+Do you want to ensure a consistent user experience across platforms?
 
-### Adobe Pass Flows
+Do you want to reduce maintenance effort and simplify providing updates, bug fixes, or improvements?
 
-#### Basic Flows
+### Introducing REST API V2
 
-##### [Primary Device Profiles](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-profiles-primary-application-flow.html)
+Adobe Pass Authentication is thrilled to announce the launch of REST API V2, designed to enhance user experience and simplify integration with Pass services.
 
-Obtain information on user active logins from the primary streaming application.
+We are excited about the possibilities of our new REST API, which represents a major step forward for our platform and opens the door for new features and application flows.
 
-##### [Second Screen Profiles](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-profiles-secondary-application-flow.html)
+### What’s New?
 
-Obtain information on user active logins from a secondary device.
+#### Unique implementation across all platforms
 
-##### [Primary Device Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-authentication-primary-application-flow.html)
+Customers' applications can now use the same implementation across platforms, making it easier to launch new features or maintain live apps.
 
-The scenario in which the primary streaming application has the ability to provide all the required parameters in one single call in order to create an authentication session and has the capability to open a user agent in order to authenticate with the selected MVPD.
+#### Cross-device SSO
 
-##### [Second Screen Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-authentication-secondary-application-flow.html)
+REST API v2 allows an authentication session to be securely passed between different devices. By simply passing the session between devices, users can authenticate on their mobile device and stream video on a TV-connected device without re-authentication.
 
-The scenario in which the primary streaming application has the capability to create an authentication session, but does not have the ability to gather all the required parameters or open a user agent in order to authenticate with the selected MVPD.
+#### Multiple active authentication sessions
 
-##### [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-authorization-primary-application-flow.html)
+Different active MVPD sessions are now possible, and customers can choose to switch between TempPass and regular MVPD integration when needed.
 
-Verify that a user is entitled to view content represented as resource from the primary streaming application.
+#### Enhanced security mechanism
 
-##### [Preauthorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-preauthorization-primary-application-flow.html)
+Dynamic Client Registration is the security mechanism used across all flows and functionalities. It allows for more secure and granular control of customers' applications and can register applications on all platforms.
 
-Verify that a user may have access to a list of resources in order for the primary streaming application to present accurate information to the user on content he would be able to see.
+#### Improved performance for faster response times
 
-##### [Logout](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-basic-flows/rest-api-v2-basic-logout-primary-application-flow.html)
+Enhanced caching mechanisms allow for less traffic to MVPDs, improving response times and reducing latency. Overall, there is a reduced number of API calls until the video starts.
 
-The flow that enables the Programmer Application to delete the authenticated profile information saved on the Adobe Pass backend and navigate to the MVPD logout endpoint to trigger the deletion of the authenticated profile information.
+#### Enhanced error codes on all flows
 
-#### Degraded Access Flows
+Advanced error codes are now available on all Pass flows in the same format, with additional details guiding the applications to improve the overall user experience.
 
-##### [Degraded Access](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-degraded-access-flows/rest-api-v2-access-degraded-flows.html)
+#### Improved control over all authentication sessions
 
-Flows related to the Degradation feature, providing the capability to temporarily bypass specific MVPD Authentication and Authorization endpoints.
+The new REST API permits actions on multiple authenticated sessions at the same time.
 
-#### Temporary Access Flows
+#### Reduce maintenance costs
 
-##### [Temporary Access](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-temporary-access-flows/rest-api-v2-access-temporary-flows.html)
+All responses and error information are now normalized.
 
-Flows related to the TempPass feature, offering temporary access to protected content to users who don't have account credentials with an MVPD.
+### What’s Next?
 
-#### Single Sign-On Flows
+All customers currently using our APIs through SDKs or REST calls can continue to do so, as we plan to continue providing support through the end of 2025.
 
-##### [Partner SSO Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-flows/rest-api-v2-single-sign-on-partner-flows.html)
+However, all future developments will be built on the REST API V2. We strongly recommend starting the migration process to benefit from the latest Adobe Pass functionalities.
 
-Perform authentication through a Partner that is providing its own partner framework for implementing the authentication flow with supported MVPDs.
+### Learn More
 
-##### [Platform Identity SSO Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-flows/rest-api-v2-single-sign-on-platform-identity-flows.html)
-
-This single sign-on method is based on sharing a unique identifier which could be a device scoped identifier or platform scoped identifier. This unique identifier can be used from multiple applications to perform single sign-on flows at device / platform level.
-
-##### [Service Token SSO Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-flows/rest-api-v2-single-sign-on-service-token-flows.html)
-
-This single-sign-on method is based on sharing a user unique identifier value across multiple devices and platforms. This user unique identifier which comes from an external identity service can be used from multiple applications/devices to perform single sign-on flows.
-
-##### [SSO Logout](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-flows/rest-api-v2-single-sign-on-logout-flow.html)
-
-The flow that enables the Programmer Application to delete the authenticated profile information saved on the Adobe Pass backend, created through Single Sign-On mechanism.
-
-### API References
-
-##### [Configuration API](api/rest_api_v2/interactive/#tag/Configuration-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-configuration-apis/rest-api-v2-configuration-apis-retrieve-configuration-for-specific-service-provider.html).
-
-##### [Sessions API](api/rest_api_v2/interactive/#tag/Sessions-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-sessions-apis/rest-api-v2-sessions-apis-create-authentication-session.html).
-
-##### [Profiles API](api/rest_api_v2/interactive/#tag/Profiles-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-profiles-apis/rest-api-v2-profiles-apis-retrieve-authenticated-profiles-for-specific-mvpd.html).
-
-##### [Decisions API](api/rest_api_v2/interactive/#tag/Decision-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-decisions-apis/rest-api-v2-decisions-apis-retrieve-authorization-decisions-using-specific-mvpd.html).
-
-##### [Logout API](api/rest_api_v2/interactive/#tag/Logout-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-logout-apis/rest-api-v2-logout-apis-initiate-logout-for-specific-mvpd.html).
-
-##### [Partner SSO API](api/rest_api_v2/interactive/#tag/Partner-SSO-Controller)
-
-For full documentation of this API head over to our [public docs](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-partner-single-sign-on-apis/rest-api-v2-partner-single-sign-on-apis-retrieve-partner-authentication-request.html).
+Check out our public documentation for more information. Our dedicated support team is also available to help you with any questions or technical assistance you may need.

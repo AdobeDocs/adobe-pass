@@ -3,9 +3,9 @@ title: DCR API Spec
 description: DCR API Spec
 ---
 
-<InlineAlert variant="info" slots="header, text"></InlineAlert>
+<InlineAlert variant="warning" slots="header, text"></InlineAlert>
 
-Note
+Important
 
 The content on this page is provided for information purposes only. Usage of this API requires a current license from Adobe. No unauthorized use is permitted.
 
