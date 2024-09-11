@@ -1,8 +1,6 @@
 ---
 title: Overview - Adobe Pass Authentication
-description: This is the overview page of Cat Analytics
-#contributors:
-#  - https://github.com/icaraps 
+description: This is the overview page of Adobe Pass Authentication
 ---
 
 <Hero slots="heading, text"></Hero>
