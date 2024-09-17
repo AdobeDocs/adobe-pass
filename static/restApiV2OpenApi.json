@@ -5,7 +5,7 @@
     "version" : "V2"
   },
   "servers" : [ {
-    "url" : "https://sp.auth.adobe.com/api/v2"
+    "url" : "//sp.auth.adobe.com/api/v2"
   } ],
   "tags" : [ {
     "description" : "Create authentication sessions",
@@ -281,10 +281,15 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "items" : {
-                  "type" : "string"
+                "properties" : {
+                  "resources" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    }
+                  }
                 },
-                "type" : "array"
+                "type" : "object"
               }
             }
           },
