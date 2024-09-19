@@ -84,7 +84,7 @@
     },
     "/{serviceProvider}/configuration" : {
       "get" : {
-        "operationId" : "handleRequestUsingGET",
+        "operationId" : "handleRequestUsingGET_1",
         "parameters" : [ {
           "description" : "-",
           "in" : "query",
@@ -180,7 +180,7 @@
     },
     "/{serviceProvider}/decisions/authorize/{mvpd}" : {
       "post" : {
-        "operationId" : "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
+        "operationId" : "retrieveAuthorizeDecisionsForMvpdUsingPOST",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.",
           "in" : "path",
@@ -283,14 +283,11 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "items" : {
-                  "type" : "string"
-                },
-                "type" : "array"
+                "type" : "object"
               }
             }
           },
-          "description" : "The list of resources that require an MVPD decision before they can be played.",
+          "description" : "{\n \"resources\": [\"res1\"] \n}",
           "required" : true
         },
         "responses" : {
@@ -328,7 +325,7 @@
     },
     "/{serviceProvider}/decisions/preauthorize/{mvpd}" : {
       "post" : {
-        "operationId" : "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
+        "operationId" : "retrievePreAuthorizeDecisionsForMvpdUsingPOST_1",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Identity Provider during onboarding process.",
           "in" : "path",
@@ -598,7 +595,7 @@
     },
     "/{serviceProvider}/profiles" : {
       "get" : {
-        "operationId" : "getProfilesUsingGET_1",
+        "operationId" : "getProfilesUsingGET",
         "parameters" : [ {
           "description" : "The internal unique identifier associated with the Service Provider during onboarding process.",
           "in" : "path",
@@ -708,7 +705,7 @@
     },
     "/{serviceProvider}/profiles/code/{code}" : {
       "get" : {
-        "operationId" : "getProfileForCodeUsingGET_1",
+        "operationId" : "getProfileForCodeUsingGET",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",
@@ -737,6 +734,13 @@
           "description" : "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
           "in" : "header",
           "name" : "X-Forwarded-For",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation.",
+          "in" : "header",
+          "name" : "AP-Temppass-Identity",
           "schema" : {
             "type" : "string"
           }
@@ -1284,7 +1288,7 @@
     },
     "/{serviceProvider}/sessions/{code}" : {
       "get" : {
-        "operationId" : "getSessionStatusUsingGET",
+        "operationId" : "getSessionStatusUsingGET_1",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",
@@ -1363,7 +1367,7 @@
         "tags" : [ "2. Sessions" ]
       },
       "post" : {
-        "operationId" : "resumeSessionUsingPOST_1",
+        "operationId" : "resumeSessionUsingPOST",
         "parameters" : [ {
           "description" : "The authentication code obtained after creating the authentication session on the streaming device.",
           "in" : "path",

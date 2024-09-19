@@ -98,7 +98,7 @@
           "1. Configuration"
         ],
         "summary": "Retrieve configuration for specific service provider",
-        "operationId": "handleRequestUsingGET",
+        "operationId": "handleRequestUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -191,7 +191,7 @@
           "4. Decisions"
         ],
         "summary": "Retrieve authorization decisions using specific MVPD",
-        "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
+        "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -208,22 +208,11 @@
           },
           {
             "in": "body",
-            "name": "properties",
+            "name": "resources",
+            "description": "{\n \"resources\": [\"res1\"] \n}",
             "required": true,
             "schema": {
               "type": "object"
-            }
-          },
-          {
-            "in": "body",
-            "name": "resources",
-            "description": "The list of resources that require an MVPD decision before they can be played.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
             }
           },
           {
@@ -339,7 +328,7 @@
           "4. Decisions"
         ],
         "summary": "Retrieve preauthorization decisions using specific MVPD",
-        "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
+        "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -596,7 +585,7 @@
           "3. Profiles"
         ],
         "summary": "Retrieve profiles",
-        "operationId": "getProfilesUsingGET_1",
+        "operationId": "getProfilesUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -703,7 +692,7 @@
           "3. Profiles"
         ],
         "summary": "Retrieve profiles for specific code",
-        "operationId": "getProfileForCodeUsingGET_1",
+        "operationId": "getProfileForCodeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -736,6 +725,13 @@
             "name": "X-Forwarded-For",
             "in": "header",
             "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AP-Temppass-Identity",
+            "in": "header",
+            "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation.",
             "required": false,
             "type": "string"
           },
@@ -1271,7 +1267,7 @@
           "2. Sessions"
         ],
         "summary": "Retrieve authentication session using code",
-        "operationId": "getSessionStatusUsingGET",
+        "operationId": "getSessionStatusUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -1348,7 +1344,7 @@
           "2. Sessions"
         ],
         "summary": "Resume authentication session",
-        "operationId": "resumeSessionUsingPOST_1",
+        "operationId": "resumeSessionUsingPOST",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
