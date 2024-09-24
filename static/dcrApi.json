@@ -81,18 +81,10 @@
         }
     },
     "servers": [
-        {
-            "url": "https://sp.auth.adobe.com/api/v2"
-        },
-        {
-            "url": "https://sp-prequal.auth.adobe.com/api/v2"
-        },
-        {
-            "url": "https://sp-prequal.auth-staging.adobe.com/api/v2"
-        },
-        {
-            "url": "https://sp.auth-staging.adobe.com/api/v2"
-        }
+        "https://sp.auth.adobe.com/o",
+        "https://sp-prequal.auth.adobe.com/o",
+        "https://sp-prequal.auth-staging.adobe.com/o",
+        "https://sp.auth-staging.adobe.com/o"
     ],
     "openapi": "3.0.1",
     "paths": {
