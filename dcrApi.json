@@ -1,212 +1,245 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "DCR API",
-    "version" : "V2"
-  },
-  "servers" : [ {
-    "url" : "https://sp.auth.adobe.com/o"
-  } ],
-  "tags" : [ {
-    "description" : "It secures client communications between a programmer application or server and the Adobe Pass services.",
-    "name" : "Dynamic Client Registration API"
-  } ],
-  "paths" : {
-    "/client/register" : {
-      "post" : {
-        "description" : "Get client credentials for a software statement and get scopes information",
-        "operationId" : "processSoftwareStatementUsingPOST",
-        "parameters" : [ {
-          "description" : "application/json",
-          "in" : "header",
-          "name" : "Content-Type",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The device information as defined in Passing Device and Connection Information",
-          "in" : "header",
-          "name" : "X-Device-Info",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The user agent",
-          "in" : "header",
-          "name" : "User-Agent",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ClientRegistrationRequest"
-              }
+    "components": {
+        "schemas": {
+            "ClientRegistrationAccessTokenResponse": {
+                "description": "Response object for client registration access token requests",
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "description": "The access token value you should use to call the Adobe Pass APIs.",
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "format": "int64",
+                        "description": "The issue time of the token.",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "type": "string"
+                    },
+                    "expires_in": {
+                        "format": "int64",
+                        "description": "The time in seconds until the access_token expires.",
+                        "type": "integer"
+                    }
+                }
+            },
+            "ClientApplication": {
+                "type": "object",
+                "properties": {
+                    "grant_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "client_id_issued_at": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "client_secret": {
+                        "type": "string"
+                    },
+                    "redirect_uris": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "scopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "client_id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ClientRegistrationRequest": {
+                "type": "object",
+                "properties": {
+                    "software_statement": {
+                        "type": "string"
+                    },
+                    "redirect_uri": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "redirect_uri",
+                    "software_statement"
+                ]
             }
-          },
-          "description" : "The software statement created in TVE Dashboard and the URI that the application uses for completing the authentication flow can optionally be present.",
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ClientApplication"
-                }
-              }
-            },
-            "description" : "Created"
-          },
-          "400" : {
-            "content" : { },
-            "description" : "Bad request"
-          }
-        },
-        "summary" : "Register client application",
-        "tags" : [ "Dynamic Client Registration API" ],
-        "x-codegen-request-body-name" : "clientRegistrationRequest"
-      }
+        }
     },
-    "/client/token" : {
-      "post" : {
-        "description" : "Get access token for a pair of client credentials",
-        "operationId" : "generateAccessTokenUsingPOST",
-        "parameters" : [ {
-          "description" : "Client identifier obtained in the client registration process.",
-          "in" : "query",
-          "name" : "client_id",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "Client identifier obtained in the client registration process.",
-          "in" : "query",
-          "name" : "client_secret",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "The token used to refresh the access token.",
-          "in" : "query",
-          "name" : "refresh_token",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "description" : "Received in the client registration process. The accepted value is: client_credentials: Used for insecure clients, such as the Android SDK.",
-          "in" : "query",
-          "name" : "grant_type",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "201" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ClientRegistrationAccessTokenResponse"
-                }
-              }
-            },
-            "description" : "Created"
-          },
-          "400" : {
-            "content" : { },
-            "description" : "Bad request"
-          }
+    "servers": [
+        {
+            "url": "https://sp.auth.adobe.com/api/v2"
         },
-        "summary" : "Retrieve client token",
-        "tags" : [ "Dynamic Client Registration API" ]
-      }
-    }
-  },
-  "components" : {
-    "schemas" : {
-      "ClientRegistrationAccessTokenResponse" : {
-        "description" : "Response object for client registration access token requests",
-        "properties" : {
-          "access_token" : {
-            "description" : "The access token value you should use to call the Adobe Pass APIs.",
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The issue time of the token.",
-            "format" : "int64",
-            "type" : "integer"
-          },
-          "expires_in" : {
-            "description" : "The time in seconds until the access_token expires.",
-            "format" : "int64",
-            "type" : "integer"
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "refresh_token" : {
-            "type" : "string"
-          },
-          "token_type" : {
-            "type" : "string"
-          }
+        {
+            "url": "https://sp-prequal.auth.adobe.com/api/v2"
         },
-        "type" : "object"
-      },
-      "ClientApplication" : {
-        "properties" : {
-          "client_id" : {
-            "type" : "string"
-          },
-          "client_id_issued_at" : {
-            "format" : "int64",
-            "type" : "integer"
-          },
-          "client_secret" : {
-            "type" : "string"
-          },
-          "grant_types" : {
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "redirect_uris" : {
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "scopes" : {
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          }
+        {
+            "url": "https://sp-prequal.auth-staging.adobe.com/api/v2"
         },
-        "type" : "object"
-      },
-      "ClientRegistrationRequest" : {
-        "properties" : {
-          "software_statement" : {
-            "type" : "string"
-          },
-          "redirect_uri" : {
-            "type" : "string"
-          }
+        {
+            "url": "https://sp.auth-staging.adobe.com/api/v2"
+        }
+    ],
+    "openapi": "3.0.1",
+    "paths": {
+        "/client/register": {
+            "post": {
+                "summary": "Register client application",
+                "x-codegen-request-body-name": "clientRegistrationRequest",
+                "requestBody": {
+                    "description": "The software statement created in TVE Dashboard and the URI that the application uses for completing the authentication flow can optionally be present.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientRegistrationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "description": "Get client credentials for a software statement and get scopes information",
+                "operationId": "processSoftwareStatementUsingPOST",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClientApplication"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "Content-Type",
+                        "description": "application/json",
+                        "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Device-Info",
+                        "description": "The device information as defined in Passing Device and Connection Information",
+                        "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "User-Agent",
+                        "description": "The user agent",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Dynamic Client Registration API"
+                ]
+            }
         },
-        "required" : [ "redirect_uri", "software_statement" ],
-        "type" : "object"
-      }
-    }
-  },
-  "x-original-swagger-version" : "2.0"
+        "/client/token": {
+            "post": {
+                "summary": "Retrieve client token",
+                "description": "Get access token for a pair of client credentials",
+                "operationId": "generateAccessTokenUsingPOST",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClientRegistrationAccessTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "name": "client_id",
+                        "description": "Client identifier obtained in the client registration process.",
+                        "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "name": "client_secret",
+                        "description": "Client identifier obtained in the client registration process.",
+                        "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "name": "refresh_token",
+                        "description": "The token used to refresh the access token."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "name": "grant_type",
+                        "description": "Received in the client registration process. The accepted value is: client_credentials: Used for insecure clients, such as the Android SDK.",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Dynamic Client Registration API"
+                ]
+            }
+        }
+    },
+    "x-original-swagger-version": "2.0",
+    "info": {
+        "title": "DCR API",
+        "version": "V2"
+    },
+    "tags": [
+        {
+            "name": "Dynamic Client Registration API",
+            "description": "It secures client communications between a programmer application or server and the Adobe Pass services."
+        }
+    ]
 }
