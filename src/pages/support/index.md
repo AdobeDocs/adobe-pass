@@ -35,16 +35,3 @@ Tutorials and videos for the whole community.
 
 Forum to get help and help others
 
-## Community
-
-You've got a place to join the conversation.
-
-<DiscoverBlock slots="image, heading, link, text" width="100%"/>
-
-![Stack Overflow](stack-overflow.png)
-
-### Stack Overflow
-
-[Explore](https://adobe.io)
-
-Developer Q&A using a specific tag.
