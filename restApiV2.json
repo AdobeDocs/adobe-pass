@@ -1159,13 +1159,20 @@
         "/{serviceProvider}/profiles/sso/{partner}": {
             "post": {
                 "summary": "Retrieve profile using partner authentication response",
-                "x-codegen-request-body-name": "SAMLResponse",
                 "requestBody": {
-                    "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "type": "string"
+                                "required": [
+                                    "SAMLResponse"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "SAMLResponse": {
+                                        "type": "string",
+                                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded."
+                                    }
+                                }
                             }
                         }
                     },
