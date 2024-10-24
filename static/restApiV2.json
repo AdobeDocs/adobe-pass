@@ -580,14 +580,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -742,14 +734,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -850,14 +834,6 @@
                         "name": "Authorization",
                         "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1040,14 +1016,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "Accept",
                         "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json."
                     },
@@ -1141,14 +1109,6 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1308,14 +1268,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "AP-Partner-Framework-Status",
                         "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1451,14 +1403,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "AP-Partner-Framework-Status",
                         "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1578,14 +1522,6 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1740,14 +1676,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1888,14 +1816,6 @@
                             "type": "string"
                         },
                         "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
                         "name": "Accept",
                         "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json."
                     },
@@ -1978,14 +1898,6 @@
                         "name": "Authorization",
                         "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -2094,14 +2006,6 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Forwarded-For",
-                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
