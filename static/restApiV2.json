@@ -118,19 +118,27 @@
                 "description": "Response object for session status requests",
                 "type": "object",
                 "properties": {
-                    "existing": {
+                    "notAfter": {
+                        "description": "The timestamp after which the authentication session code is not valid.",
+                        "type": "string"
+                    },
+                    "existingParameters": {
                         "description": "The existing parameters that were already provided.",
                         "additionalProperties": {
                             "type": "string"
                         },
                         "type": "object"
                     },
-                    "missing": {
+                    "missingParameters": {
                         "description": "The existing parameters that were already provided.",
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "notBefore": {
+                        "description": "The timestamp before which the authentication session code is not valid.",
+                        "type": "string"
                     }
                 }
             },
@@ -253,6 +261,23 @@
                     }
                 }
             },
+            "createSessionUsingPOST_1_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "mvpd": {
+                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
+                }
+            },
             "UserMetadataResponse": {
                 "type": "object",
                 "properties": {
@@ -262,64 +287,70 @@
                     "error": {
                         "type": "string",
                         "enum": [
-                            "missing_authentication_code",
-                            "authentication_session_invalidated",
-                            "authentication_session_missing",
-                            "preauthorization_authentication_session_missing",
-                            "authentication_session_expired",
-                            "preauthorization_authentication_session_expired",
-                            "authentication_session_issuer_mismatch",
-                            "unknown_integration",
-                            "invalid_device_id",
-                            "invalid_requestor",
-                            "invalid_redirect_url",
-                            "invalid_session",
-                            "missing_dcr_application",
-                            "missing_resource",
-                            "missing_resources",
-                            "invalid_device_info",
-                            "authorization_not_found",
-                            "authorization_expired",
-                            "malformed_authz_request",
-                            "authorization_denied_by_mvpd",
+                            "invalid_parameter_service_provider",
+                            "invalid_parameter_mvpd",
+                            "invalid_parameter_code",
+                            "invalid_parameter_redirect_url",
+                            "invalid_parameter_resources",
+                            "invalid_parameter_partner",
+                            "invalid_parameter_saml_response",
+                            "invalid_header_device_info",
+                            "invalid_header_device_identifier",
+                            "invalid_header_identity_for_temporary_access",
+                            "invalid_header_pfs_permission_access_not_present",
+                            "invalid_header_pfs_permission_access_not_determined",
+                            "invalid_header_pfs_permission_access_not_granted",
+                            "invalid_header_pfs_provider_id_not_determined",
+                            "invalid_header_pfs_provider_id_mismatch",
+                            "invalid_integration",
+                            "invalid_authentication_session",
                             "authorization_denied_by_degradation_rule",
                             "authorization_denied_by_degradation_configuration_change",
-                            "authorization_denied_by_parental_controls",
-                            "authorization_denied_by_session_invalidated",
-                            "authorization_denied_by_hba_policies",
-                            "identity_not_recognized_by_mvpd",
-                            "network_received_error",
+                            "internal_server_error",
                             "invalid_refresh_token",
                             "preauthorization_denied_by_mvpd",
+                            "authorization_denied_by_mvpd",
+                            "authorization_denied_by_parental_controls",
+                            "invalid_requestor",
+                            "invalid_device_info",
+                            "invalid_device_id",
+                            "missing_resource",
+                            "malformed_authz_request",
+                            "internal_error",
+                            "invalid_configuration_user_metadata_certificate",
+                            "invalid_configuration_temporary_access",
+                            "invalid_configuration_platform",
+                            "invalid_configuration_platform_id",
+                            "invalid_configuration_platform_trait",
+                            "invalid_configuration_platform_category_trait",
+                            "invalid_configuration_platform_services",
+                            "invalid_configuration_mvpd_platform",
+                            "invalid_configuration_mvpd_platform_boarding_status",
+                            "invalid_configuration_mvpd_platform_profile_exchange",
                             "too_many_resources",
-                            "invalid_decision_resources",
-                            "invalid_mvpd",
+                            "unknown_integration",
+                            "invalid_access_token_service_provider",
+                            "invalid_access_token_client_application",
+                            "authenticated_profile_missing",
+                            "authenticated_profile_expired",
+                            "authenticated_profile_invalidated",
+                            "temporary_access_duration_limit_exceeded",
+                            "temporary_access_resources_limit_exceeded",
+                            "authorization_denied_by_hba_policies",
+                            "authorization_denied_by_session_invalidated",
+                            "identity_not_recognized_by_mvpd",
+                            "authentication_session_issuer_mismatch",
+                            "authentication_session_invalidated",
+                            "authentication_session_missing",
+                            "authentication_session_expired",
+                            "preauthorization_authentication_session_missing",
+                            "preauthorization_authentication_session_expired",
+                            "authorization_not_found",
+                            "authorization_expired",
+                            "network_received_error",
                             "network_connection_timeout",
                             "maximum_execution_time_exceeded",
-                            "internal_error",
-                            "invalid_certificate",
-                            "need_to_reauthenticate",
-                            "temppass_invalid_identity",
-                            "temppass_expired",
-                            "temppass_max_resources_exceeded",
-                            "temppass_invalid_configuration",
-                            "registered_app_mismatch",
-                            "invalid_platformid",
-                            "invalid_platformtrait",
-                            "invalid_platformcategory_trait",
-                            "invalid_platform_configuration",
-                            "disabled_platform_services",
-                            "invalid_mvpd_platform_settings",
-                            "unsupported_mvpd_boarding_status",
-                            "invalid_profile_exchange_configuration",
-                            "invalid_sso_partner",
-                            "invalid_sso_partner_saml_response",
-                            "degraded_integration",
-                            "framework_permissions_not_present",
-                            "framework_permissions_not_determined",
-                            "framework_permissions_not_granted",
-                            "framework_mappingid_not_determined",
-                            "framework_mappingid_mismatch"
+                            "degraded_integration"
                         ]
                     },
                     "value": {
@@ -349,6 +380,10 @@
                         "description": "The type of interaction the client application must perform in order to continue the flow with the action specified by the parameter \"actionName\".",
                         "type": "string"
                     },
+                    "notAfter": {
+                        "description": "The timestamp after which the authentication session code is not valid.",
+                        "type": "string"
+                    },
                     "code": {
                         "description": "The registration code that can be used on the secondary device to continue the authentication flow.",
                         "type": "string"
@@ -370,6 +405,10 @@
                     },
                     "mvpd": {
                         "description": "The id of the identity provider.",
+                        "type": "string"
+                    },
+                    "notBefore": {
+                        "description": "The timestamp before which the authentication session code is not valid.",
                         "type": "string"
                     },
                     "url": {
@@ -410,23 +449,6 @@
                         "format": "int64",
                         "description": "The minimum timestamp for the authentication profile time-to-live (ttl).",
                         "type": "integer"
-                    }
-                }
-            },
-            "createSessionUsingPOST_request": {
-                "type": "object",
-                "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "mvpd": {
-                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
                     }
                 }
             },
@@ -483,7 +505,7 @@
                     },
                     "required": true
                 },
-                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
+                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of decisions with additional information.<summary>",
@@ -580,6 +602,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -632,7 +662,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET_1",
+                "operationId": "getLogoutForMvpdUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -728,6 +758,14 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -840,6 +878,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "Accept",
                         "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json."
                     },
@@ -860,7 +906,7 @@
         "/authenticate/{serviceProvider}/{code}": {
             "get": {
                 "summary": "Perform authentication in user agent",
-                "operationId": "startAuthenticationUsingGET",
+                "operationId": "startAuthenticationUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1016,6 +1062,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "Accept",
                         "description": "The media type accepted by the client application.\n\nIf specified, it must be application/json."
                     },
@@ -1036,7 +1090,7 @@
         "/{serviceProvider}/profiles": {
             "get": {
                 "summary": "Retrieve profiles",
-                "operationId": "getProfilesUsingGET_1",
+                "operationId": "getProfilesUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1115,6 +1169,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1159,26 +1221,19 @@
         "/{serviceProvider}/profiles/sso/{partner}": {
             "post": {
                 "summary": "Retrieve profile using partner authentication response",
+                "x-codegen-request-body-name": "SAMLResponse",
                 "requestBody": {
+                    "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "required": [
-                                    "SAMLResponse"
-                                ],
-                                "type": "object",
-                                "properties": {
-                                    "SAMLResponse": {
-                                        "type": "string",
-                                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded."
-                                    }
-                                }
+                                "type": "string"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "createPartnerProfileUsingPOST_1",
+                "operationId": "createPartnerProfileUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1269,6 +1324,14 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1410,6 +1473,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "AP-Partner-Framework-Status",
                         "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1442,12 +1513,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
                             }
                         }
                     }
                 },
-                "operationId": "createSessionUsingPOST",
+                "operationId": "createSessionUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1529,6 +1600,14 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1683,6 +1762,14 @@
                             "type": "string"
                         },
                         "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
                         "name": "Adobe-Subject-Token",
                         "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
@@ -1739,12 +1826,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
                             }
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST",
+                "operationId": "resumeSessionUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1817,6 +1904,14 @@
                         "name": "Content-Type",
                         "description": "The media type accepted by the client application.\n\nIf specified, it must be application/x-www-form-urlencoded.",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -1905,6 +2000,14 @@
                         "name": "Authorization",
                         "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
@@ -2013,6 +2116,14 @@
                         "name": "X-Device-Info",
                         "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "X-Forwarded-For",
+                        "description": "The IP address of the streaming device.\n\nIt is strongly recommended to always use it for server to server implementations, particularly when the call is made by the programmer service rather than the streaming device.\n\nFor client to server implementations, the IP address of the streaming device is sent implicitly"
                     },
                     {
                         "schema": {
