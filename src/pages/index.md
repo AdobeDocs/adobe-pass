@@ -27,8 +27,10 @@ Integrate the new REST API v2 to benefit from the latest Adobe Pass functionalit
 #### Resources
 
 * [Adobe Pass Authentication Docs](https://experienceleague.adobe.com/en/docs/pass/authentication/home)
-* [REST API v2 APIs Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-apis/rest-api-v2-apis-overview)
-* [REST API v2 Flows Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/programmer-integration-guide/rest-api-v2/rest-api-v2-flows/rest-api-v2-flows-overview)
+* [REST API v2 Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-overview)
+* [REST API v2 APIs Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-apis/rest-api-v2-apis-overview)
+* [REST API v2 Flows Overview](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-flows-overview)
+* [REST API v2 FAQs](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-faqs)
 
 ## Simplify TVE Experience
 
