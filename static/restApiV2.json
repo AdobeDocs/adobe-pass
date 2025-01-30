@@ -261,23 +261,6 @@
                     }
                 }
             },
-            "retrieveVerificationTokenUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "domainName",
-                    "redirectUrl"
-                ]
-            },
             "createSessionUsingPOST_1_request": {
                 "type": "object",
                 "properties": {
@@ -468,6 +451,23 @@
                         "type": "integer"
                     }
                 }
+            },
+            "retrieveVerificationTokenUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domainName",
+                    "redirectUrl"
+                ]
             }
         }
     },
@@ -662,7 +662,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET",
+                "operationId": "getLogoutForMvpdUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -1090,7 +1090,7 @@
         "/{serviceProvider}/profiles": {
             "get": {
                 "summary": "Retrieve profiles",
-                "operationId": "getProfilesUsingGET_1",
+                "operationId": "getProfilesUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1370,13 +1370,13 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_1_request"
+                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveVerificationTokenUsingPOST_1",
+                "operationId": "retrieveVerificationTokenUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1665,7 +1665,7 @@
                     },
                     "required": true
                 },
-                "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST",
+                "operationId": "retrievePreAuthorizeDecisionsForMvpdUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of decisions with additional information.<summary>",
@@ -1831,7 +1831,7 @@
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST_1",
+                "operationId": "resumeSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
