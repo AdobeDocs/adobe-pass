@@ -85,6 +85,9 @@
             "url": "https://sp.auth.adobe.com/o"
         },
         {
+            "url": "https://sp-afrodita.auth.adobe.com/o"
+        },
+        {
             "url": "https://sp-prequal.auth.adobe.com/o"
         },
         {
