@@ -476,6 +476,9 @@
             "url": "https://sp.auth.adobe.com/api/v2"
         },
         {
+            "url": "https://sp-afrodita.auth.adobe.com/api/v2"
+        },
+        {
             "url": "https://sp-prequal.auth.adobe.com/api/v2"
         },
         {
