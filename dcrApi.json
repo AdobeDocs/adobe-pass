@@ -156,8 +156,7 @@
                         },
                         "in": "header",
                         "name": "User-Agent",
-                        "description": "The user agent",
-                        "required": true
+                        "description": "The user agent"
                     }
                 ],
                 "tags": [
