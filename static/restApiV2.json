@@ -261,23 +261,6 @@
                     }
                 }
             },
-            "createSessionUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "mvpd": {
-                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    }
-                }
-            },
             "UserMetadataResponse": {
                 "type": "object",
                 "properties": {
@@ -426,6 +409,17 @@
                     }
                 }
             },
+            "retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request": {
+                "type": "object",
+                "properties": {
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "createPartnerProfileUsingPOST_request": {
                 "type": "object",
                 "properties": {
@@ -469,6 +463,23 @@
                     }
                 }
             },
+            "createSessionUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "mvpd": {
+                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
+                }
+            },
             "retrieveVerificationTokenUsingPOST_request": {
                 "type": "object",
                 "properties": {
@@ -485,17 +496,6 @@
                     "domainName",
                     "redirectUrl"
                 ]
-            },
-            "retrieveAuthorizeDecisionsForMvpdUsingPOST_request": {
-                "type": "object",
-                "properties": {
-                    "resources": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
             }
         }
     },
@@ -524,13 +524,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
+                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of decisions with additional information.<summary>",
@@ -543,19 +543,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -592,7 +592,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -610,7 +610,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -619,7 +619,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -628,7 +628,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -636,7 +636,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -644,7 +644,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -652,7 +652,7 @@
                         },
                         "in": "header",
                         "name": "AP-Temppass-Identity",
-                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity.html) documentation."
+                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation."
                     },
                     {
                         "schema": {
@@ -679,7 +679,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET_1",
+                "operationId": "getLogoutForMvpdUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -692,19 +692,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -755,7 +755,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -764,7 +764,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -773,7 +773,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -782,7 +782,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -790,7 +790,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -830,19 +830,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -879,7 +879,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -907,7 +907,19 @@
         "/authenticate/{serviceProvider}/{code}": {
             "get": {
                 "summary": "Perform authentication in user agent",
-                "operationId": "startAuthenticationUsingGET",
+                "x-codegen-request-body-name": "request",
+                "requestBody": {
+                    "description": "request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SessionConsumeRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "operationId": "startAuthenticationUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -916,13 +928,13 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -989,19 +1001,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1037,7 +1049,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1046,7 +1058,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1055,7 +1067,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1083,7 +1095,7 @@
         "/{serviceProvider}/profiles": {
             "get": {
                 "summary": "Retrieve profiles",
-                "operationId": "getProfilesUsingGET_1",
+                "operationId": "getProfilesUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1096,19 +1108,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1136,7 +1148,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1145,7 +1157,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1154,7 +1166,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1163,7 +1175,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1171,7 +1183,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1179,7 +1191,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1229,19 +1241,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1278,7 +1290,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1296,7 +1308,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1305,7 +1317,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1314,7 +1326,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1364,19 +1376,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1413,7 +1425,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1431,7 +1443,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1440,7 +1452,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1449,7 +1461,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1480,12 +1492,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
                             }
                         }
                     }
                 },
-                "operationId": "createSessionUsingPOST_1",
+                "operationId": "createSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1498,19 +1510,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1538,7 +1550,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1556,7 +1568,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1565,7 +1577,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1574,7 +1586,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1582,7 +1594,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1615,7 +1627,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
                             }
                         }
                     },
@@ -1634,19 +1646,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1683,7 +1695,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1701,7 +1713,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -1710,7 +1722,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1719,7 +1731,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1727,7 +1739,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1735,7 +1747,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -1743,7 +1755,7 @@
                         },
                         "in": "header",
                         "name": "AP-Temppass-Identity",
-                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity.html) documentation."
+                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation."
                     },
                     {
                         "schema": {
@@ -1774,12 +1786,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
                             }
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST_1",
+                "operationId": "resumeSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1792,19 +1804,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1841,7 +1853,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1889,19 +1901,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -1938,7 +1950,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -1979,19 +1991,19 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
+                        "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview) documentation.<summary>",
                         "content": {
                             
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
+                        "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes) documentation.<summary>",
                         "content": {
                             
                         }
@@ -2028,7 +2040,7 @@
                         },
                         "in": "header",
                         "name": "Authorization",
-                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
+                        "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization) header documentation.",
                         "required": true
                     },
                     {
@@ -2037,7 +2049,7 @@
                         },
                         "in": "header",
                         "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
+                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier) header documentation.",
                         "required": true
                     },
                     {
@@ -2046,7 +2058,7 @@
                         },
                         "in": "header",
                         "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
+                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -2055,7 +2067,7 @@
                         },
                         "in": "header",
                         "name": "Adobe-Subject-Token",
-                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Platform Identity method is described in the [Adobe-Subject-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-adobe-subject-token) documentation.\n\nFor more details about single sign-on enabled flows using a platform identity, refer to the [Single sign-on using platform identity flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -2063,7 +2075,7 @@
                         },
                         "in": "header",
                         "name": "AD-Service-Token",
-                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token.html) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Service Token method is described in the [AD-Service-Token](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ad-service-token) documentation.\n\nFor more details about single sign-on enabled flows using a service token, refer to the [Single sign-on using service token flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -2071,7 +2083,7 @@
                         },
                         "in": "header",
                         "name": "AP-Partner-Framework-Status",
-                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status.html) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows.html) documentation."
+                        "description": "The generation of the single sign-on payload for the Partner method is described in the [AP-Partner-Framework-Status](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-partner-framework-status) documentation.\n\nFor more details about single sign-on enabled flows using a partner, refer to the [Single sign-on using partner flows](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-flows/rest-api-v2-single-sign-on-access-flows/rest-api-v2-single-sign-on-service-token-flows) documentation."
                     },
                     {
                         "schema": {
@@ -2079,7 +2091,7 @@
                         },
                         "in": "header",
                         "name": "AP-Temppass-Identity",
-                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity.html) documentation."
+                        "description": "The generation of the user unique identifier payload is described in the [AP-TempPass-Identity](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-temppass-identity) documentation."
                     },
                     {
                         "schema": {
