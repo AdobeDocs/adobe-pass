@@ -17,14 +17,20 @@
                     }
                 }
             },
-            "ProfilesResponse": {
+            "OperatingSystem": {
                 "type": "object",
                 "properties": {
-                    "profiles": {
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/MvpdProfileResponse"
-                        },
-                        "type": "object"
+                    "vendor": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "family": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "$ref": "#/components/schemas/Version"
                     }
                 }
             },
@@ -48,121 +54,20 @@
                     }
                 }
             },
-            "DecisionResponse": {
-                "description": "Response object for decision requests",
-                "type": "object",
-                "properties": {
-                    "notAfter": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "resource": {
-                        "description": "The resource identifier for which the authorize decision is returned.",
-                        "type": "string"
-                    },
-                    "authorized": {
-                        "description": "The authorization decision for the resource. Can be either true or false.",
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "serviceProvider": {
-                        "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
-                        "type": "string"
-                    },
-                    "source": {
-                        "description": "Information about decision source: degradation, temppass, mvpd or dummy.",
-                        "type": "string"
-                    },
-                    "error": {
-                        "$ref": "#/components/schemas/ErrorInformation"
-                    },
-                    "mvpd": {
-                        "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
-                        "type": "string"
-                    },
-                    "notBefore": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "token": {
-                        "$ref": "#/components/schemas/MediaTokenResponse"
-                    }
-                }
-            },
             "Message": {
                 "type": "object"
             },
-            "LogoutResponse": {
+            "createPartnerProfileUsingPOST_1_request": {
                 "type": "object",
                 "properties": {
-                    "logouts": {
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/MvpdLogoutResponse"
-                        },
-                        "type": "object"
-                    }
-                }
-            },
-            "DecisionsResponse": {
-                "type": "object",
-                "properties": {
-                    "decisions": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DecisionResponse"
-                        }
-                    }
-                }
-            },
-            "SessionStatusResponse": {
-                "description": "Response object for session status requests",
-                "type": "object",
-                "properties": {
-                    "notAfter": {
-                        "description": "The timestamp after which the authentication code is not valid.",
-                        "type": "string"
-                    },
-                    "existingParameters": {
-                        "description": "The existing parameters that were already provided.",
-                        "additionalProperties": {
-                            "type": "string"
-                        },
-                        "type": "object"
-                    },
-                    "missingParameters": {
-                        "description": "The existing parameters that were already provided.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "notBefore": {
-                        "description": "The timestamp before which the authentication code is not valid.",
+                    "SAMLResponse": {
+                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
                         "type": "string"
                     }
-                }
-            },
-            "MvpdLogoutResponse": {
-                "description": "Mvpd logout response",
-                "type": "object",
-                "properties": {
-                    "actionType": {
-                        "description": "The type of interaction the client application must perform in order to continue the flow with the action specified by the parameter \"actionName\".",
-                        "type": "string"
-                    },
-                    "mvpd": {
-                        "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
-                        "type": "string"
-                    },
-                    "url": {
-                        "description": "The logout URL used to perform logout flow with the MVPD endpoint. It is not present when: actionName=complete or actionName=invalid.",
-                        "type": "string"
-                    },
-                    "actionName": {
-                        "description": "The action to be performed in a user-agent.",
-                        "type": "string"
-                    }
-                }
+                },
+                "required": [
+                    "SAMLResponse"
+                ]
             },
             "ErrorInformation": {
                 "type": "object",
@@ -217,6 +122,272 @@
                     }
                 }
             },
+            "Version": {
+                "type": "object",
+                "properties": {
+                    "patch": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "major": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "minor": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "profile": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Hardware": {
+                "type": "object",
+                "properties": {
+                    "vendor": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "$ref": "#/components/schemas/Version"
+                    },
+                    "manufacturer": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MvpdProfileResponse": {
+                "description": "Mvpd profile response",
+                "type": "object",
+                "properties": {
+                    "notAfter": {
+                        "format": "int64",
+                        "description": "The maximum timestamp for the authentication profile time-to-live (ttl).",
+                        "type": "integer"
+                    },
+                    "attributes": {
+                        "description": "The list of user metadata attributes. These attributes can be mandatory (userId) or non-mandatory (the rest of the user metadata fields like zip, householdId, maxRating, etc.).",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/UserMetadataResponse"
+                        },
+                        "type": "object"
+                    },
+                    "type": {
+                        "description": "The type of the authenticated profile.",
+                        "type": "string"
+                    },
+                    "issuer": {
+                        "description": "The entity that owns the authenticated profile.",
+                        "type": "string"
+                    },
+                    "notBefore": {
+                        "format": "int64",
+                        "description": "The minimum timestamp for the authentication profile time-to-live (ttl).",
+                        "type": "integer"
+                    }
+                }
+            },
+            "ProfilesResponse": {
+                "type": "object",
+                "properties": {
+                    "profiles": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/MvpdProfileResponse"
+                        },
+                        "type": "object"
+                    }
+                }
+            },
+            "DecisionResponse": {
+                "description": "Response object for decision requests",
+                "type": "object",
+                "properties": {
+                    "notAfter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "resource": {
+                        "description": "The resource identifier for which the authorize decision is returned.",
+                        "type": "string"
+                    },
+                    "authorized": {
+                        "description": "The authorization decision for the resource. Can be either true or false.",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "serviceProvider": {
+                        "description": "The internal unique identifier associated with a Service Provider during on-boarding process.",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "Information about decision source: degradation, temppass, mvpd or dummy.",
+                        "type": "string"
+                    },
+                    "error": {
+                        "$ref": "#/components/schemas/ErrorInformation"
+                    },
+                    "mvpd": {
+                        "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+                        "type": "string"
+                    },
+                    "notBefore": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "token": {
+                        "$ref": "#/components/schemas/MediaTokenResponse"
+                    }
+                }
+            },
+            "LogoutResponse": {
+                "type": "object",
+                "properties": {
+                    "logouts": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/MvpdLogoutResponse"
+                        },
+                        "type": "object"
+                    }
+                }
+            },
+            "DecisionsResponse": {
+                "type": "object",
+                "properties": {
+                    "decisions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DecisionResponse"
+                        }
+                    }
+                }
+            },
+            "Device": {
+                "type": "object",
+                "properties": {
+                    "browser": {
+                        "$ref": "#/components/schemas/Browser"
+                    },
+                    "display": {
+                        "$ref": "#/components/schemas/Display"
+                    },
+                    "connection": {
+                        "$ref": "#/components/schemas/Connection"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "applicationId": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "Camera",
+                            "DataCollectionTerminal",
+                            "Desktop",
+                            "EmbeddedNetworkModule",
+                            "eReader",
+                            "GamesConsole",
+                            "GeolocationTracker",
+                            "Glasses",
+                            "MediaPlayer",
+                            "MobilePhone",
+                            "PaymentTerminal",
+                            "PluginModem",
+                            "SetTopBox",
+                            "TV",
+                            "Tablet",
+                            "WirelessHotspot",
+                            "Wristwatch",
+                            "VehicleMultimediaSystem",
+                            "Projector",
+                            "Unknown"
+                        ]
+                    },
+                    "operatingSystem": {
+                        "$ref": "#/components/schemas/OperatingSystem"
+                    },
+                    "version": {
+                        "$ref": "#/components/schemas/Version"
+                    },
+                    "hardware": {
+                        "$ref": "#/components/schemas/Hardware"
+                    }
+                }
+            },
+            "SessionStatusResponse": {
+                "description": "Response object for session status requests",
+                "type": "object",
+                "properties": {
+                    "notAfter": {
+                        "description": "The timestamp after which the authentication code is not valid.",
+                        "type": "string"
+                    },
+                    "existingParameters": {
+                        "description": "The existing parameters that were already provided.",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "missingParameters": {
+                        "description": "The existing parameters that were already provided.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "device": {
+                        "$ref": "#/components/schemas/Device"
+                    },
+                    "notBefore": {
+                        "description": "The timestamp before which the authentication code is not valid.",
+                        "type": "string"
+                    }
+                }
+            },
+            "Connection": {
+                "type": "object",
+                "properties": {
+                    "port": {
+                        "type": "string"
+                    },
+                    "ipAddress": {
+                        "$ref": "#/components/schemas/InetAddress"
+                    },
+                    "secure": {
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MvpdLogoutResponse": {
+                "description": "Mvpd logout response",
+                "type": "object",
+                "properties": {
+                    "actionType": {
+                        "description": "The type of interaction the client application must perform in order to continue the flow with the action specified by the parameter \"actionName\".",
+                        "type": "string"
+                    },
+                    "mvpd": {
+                        "description": "The internal unique identifier associated with an Identity Provider during on-boarding process.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The logout URL used to perform logout flow with the MVPD endpoint. It is not present when: actionName=complete or actionName=invalid.",
+                        "type": "string"
+                    },
+                    "actionName": {
+                        "description": "The action to be performed in a user-agent.",
+                        "type": "string"
+                    }
+                }
+            },
             "MvpdType": {
                 "type": "object",
                 "properties": {
@@ -260,6 +431,23 @@
                         "type": "string"
                     }
                 }
+            },
+            "retrieveVerificationTokenUsingPOST_1_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domainName",
+                    "redirectUrl"
+                ]
             },
             "createSessionUsingPOST_1_request": {
                 "type": "object",
@@ -426,65 +614,106 @@
                     }
                 }
             },
-            "createPartnerProfileUsingPOST_request": {
+            "InetAddress": {
                 "type": "object",
                 "properties": {
-                    "SAMLResponse": {
-                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "SAMLResponse"
-                ]
-            },
-            "MvpdProfileResponse": {
-                "description": "Mvpd profile response",
-                "type": "object",
-                "properties": {
-                    "notAfter": {
-                        "format": "int64",
-                        "description": "The maximum timestamp for the authentication profile time-to-live (ttl).",
-                        "type": "integer"
+                    "linkLocalAddress": {
+                        "type": "boolean"
                     },
-                    "attributes": {
-                        "description": "The list of user metadata attributes. These attributes can be mandatory (userId) or non-mandatory (the rest of the user metadata fields like zip, householdId, maxRating, etc.).",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/UserMetadataResponse"
-                        },
-                        "type": "object"
-                    },
-                    "type": {
-                        "description": "The type of the authenticated profile.",
+                    "hostName": {
                         "type": "string"
                     },
-                    "issuer": {
-                        "description": "The entity that owns the authenticated profile.",
+                    "loopbackAddress": {
+                        "type": "boolean"
+                    },
+                    "mcsiteLocal": {
+                        "type": "boolean"
+                    },
+                    "address": {
+                        "type": "array",
+                        "items": {
+                            "format": "byte",
+                            "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+                            "type": "string"
+                        }
+                    },
+                    "canonicalHostName": {
                         "type": "string"
                     },
-                    "notBefore": {
-                        "format": "int64",
-                        "description": "The minimum timestamp for the authentication profile time-to-live (ttl).",
-                        "type": "integer"
+                    "mcglobal": {
+                        "type": "boolean"
+                    },
+                    "mcnodeLocal": {
+                        "type": "boolean"
+                    },
+                    "siteLocalAddress": {
+                        "type": "boolean"
+                    },
+                    "mclinkLocal": {
+                        "type": "boolean"
+                    },
+                    "mcorgLocal": {
+                        "type": "boolean"
+                    },
+                    "multicastAddress": {
+                        "type": "boolean"
+                    },
+                    "hostAddress": {
+                        "type": "string"
+                    },
+                    "anyLocalAddress": {
+                        "type": "boolean"
                     }
                 }
             },
-            "retrieveVerificationTokenUsingPOST_request": {
+            "Browser": {
                 "type": "object",
                 "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                    "originalUserAgent": {
                         "type": "string"
                     },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                    "vendor": {
                         "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "userAgent": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "$ref": "#/components/schemas/Version"
                     }
-                },
-                "required": [
-                    "domainName",
-                    "redirectUrl"
-                ]
+                }
+            },
+            "Display": {
+                "type": "object",
+                "properties": {
+                    "vendor": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ppi": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "width": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "diagonalSize": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "$ref": "#/components/schemas/Version"
+                    },
+                    "height": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                }
             },
             "retrieveAuthorizeDecisionsForMvpdUsingPOST_request": {
                 "type": "object",
@@ -679,7 +908,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET_1",
+                "operationId": "getLogoutForMvpdUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -817,7 +1046,7 @@
         "/{serviceProvider}/profiles/code/{code}": {
             "get": {
                 "summary": "Retrieve profiles for specific code",
-                "operationId": "getProfileForCodeUsingGET",
+                "operationId": "getProfileForCodeUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -907,7 +1136,7 @@
         "/authenticate/{serviceProvider}/{code}": {
             "get": {
                 "summary": "Perform authentication in user agent",
-                "operationId": "startAuthenticationUsingGET",
+                "operationId": "startAuthenticationUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1083,7 +1312,7 @@
         "/{serviceProvider}/profiles": {
             "get": {
                 "summary": "Retrieve profiles",
-                "operationId": "getProfilesUsingGET_1",
+                "operationId": "getProfilesUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1210,13 +1439,13 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createPartnerProfileUsingPOST_request"
+                                "$ref": "#/components/schemas/createPartnerProfileUsingPOST_1_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "createPartnerProfileUsingPOST",
+                "operationId": "createPartnerProfileUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1345,13 +1574,13 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_request"
+                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_1_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveVerificationTokenUsingPOST",
+                "operationId": "retrieveVerificationTokenUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1779,7 +2008,7 @@
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST_1",
+                "operationId": "resumeSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1876,7 +2105,7 @@
             },
             "get": {
                 "summary": "Retrieve authentication session using code",
-                "operationId": "getSessionStatusUsingGET_1",
+                "operationId": "getSessionStatusUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the authentication session.<summary>",
