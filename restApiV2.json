@@ -57,18 +57,6 @@
             "Message": {
                 "type": "object"
             },
-            "createPartnerProfileUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "SAMLResponse": {
-                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "SAMLResponse"
-                ]
-            },
             "ErrorInformation": {
                 "type": "object",
                 "properties": {
@@ -174,6 +162,9 @@
                             "$ref": "#/components/schemas/UserMetadataResponse"
                         },
                         "type": "object"
+                    },
+                    "sessionId": {
+                        "type": "string"
                     },
                     "type": {
                         "description": "The type of the authenticated profile.",
@@ -539,6 +530,7 @@
                             "network_received_error",
                             "network_connection_timeout",
                             "maximum_execution_time_exceeded",
+                            "maximum_attempts_exceeded",
                             "degraded_integration"
                         ]
                     },
@@ -613,6 +605,29 @@
                         "type": "string"
                     }
                 }
+            },
+            "retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request": {
+                "type": "object",
+                "properties": {
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "createPartnerProfileUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "SAMLResponse": {
+                        "description": "The partner authentication response that contains the needed user metadata to create and save a partner profile.\n\nThe value must be Base64-encoded and afterward URL-encoded.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "SAMLResponse"
+                ]
             },
             "InetAddress": {
                 "type": "object",
@@ -714,17 +729,6 @@
                         "type": "integer"
                     }
                 }
-            },
-            "retrieveAuthorizeDecisionsForMvpdUsingPOST_request": {
-                "type": "object",
-                "properties": {
-                    "resources": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
             }
         }
     },
@@ -753,13 +757,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
+                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of decisions with additional information.<summary>",
@@ -898,6 +902,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -908,7 +920,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET",
+                "operationId": "getLogoutForMvpdUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -1036,6 +1048,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1126,6 +1146,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1136,7 +1164,7 @@
         "/authenticate/{serviceProvider}/{code}": {
             "get": {
                 "summary": "Perform authentication in user agent",
-                "operationId": "startAuthenticationUsingGET_1",
+                "operationId": "startAuthenticationUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1267,24 +1295,6 @@
                         "in": "header",
                         "name": "Authorization",
                         "description": "The generation of the bearer token payload is described in the [Authorization](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-authorization.html) header documentation.",
-                        "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "AP-Device-Identifier",
-                        "description": "The generation of the device identifier payload is described in the [AP-Device-Identifier](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-ap-device-identifier.html) header documentation.",
-                        "required": true
-                    },
-                    {
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "name": "X-Device-Info",
-                        "description": "The generation of the device information payload is described in the [X-Device-Info](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-v2/rest-api-v2-appendix/rest-api-v2-appendix-headers/rest-api-v2-appendix-headers-x-device-info.html) header documentation.\n\nIt is strongly recommended to always use it when the application's device platform allows for the explicit provision of valid values.\n\nWhen provided, the Adobe Pass Authentication backend will merge explicitly set values with extracted values implicitly (by default).\n\nWhen not provided, the Adobe Pass Authentication backend will use extracted values implicitly (by default).",
                         "required": true
                     },
                     {
@@ -1425,6 +1435,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1439,13 +1457,13 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createPartnerProfileUsingPOST_1_request"
+                                "$ref": "#/components/schemas/createPartnerProfileUsingPOST_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "createPartnerProfileUsingPOST_1",
+                "operationId": "createPartnerProfileUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1560,6 +1578,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1695,6 +1721,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1828,6 +1862,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -1844,7 +1886,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
                             }
                         }
                     },
@@ -1989,6 +2031,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -2008,7 +2058,7 @@
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST",
+                "operationId": "resumeSessionUsingPOST_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -2097,6 +2147,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -2185,6 +2243,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
@@ -2195,7 +2261,7 @@
         "/{serviceProvider}/profiles/{mvpd}": {
             "get": {
                 "summary": "Retrieve profiles for specific MVPD",
-                "operationId": "getProfileForMvpdUsingGET_1",
+                "operationId": "getProfileForMvpdUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -2325,6 +2391,14 @@
                         "in": "header",
                         "name": "User-Agent",
                         "description": "The user agent of the client application."
+                    },
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "name": "AP-Visitor-Identifier",
+                        "description": "The Adobe Experience Cloud ID (ECID) that uniquely identifies a visitor across Adobe Experience Cloud solutions.\nThe generation of the visitor identifier payload is described in the [Using Experience Cloud ID in Adobe Pass Authentication](https://experienceleague.adobe.com/en/docs/pass/authentication/integration-guide-programmers/features-premium/analytics/exp-cloud-id-authn) documentation."
                     }
                 ],
                 "tags": [
