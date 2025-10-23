@@ -179,7 +179,48 @@
                         "description": "The minimum timestamp for the authentication profile time-to-live (ttl).",
                         "type": "integer"
                     }
+                },
+                "required": [
+                    "attributes",
+                    "issuer",
+                    "notAfter",
+                    "notBefore",
+                    "type"
+                ]
+            },
+            "createSessionUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "mvpd": {
+                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
                 }
+            },
+            "retrieveVerificationTokenUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "redirectUrl": {
+                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    },
+                    "domainName": {
+                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domainName",
+                    "redirectUrl"
+                ]
             },
             "ProfilesResponse": {
                 "type": "object",
@@ -231,7 +272,14 @@
                     "token": {
                         "$ref": "#/components/schemas/MediaTokenResponse"
                     }
-                }
+                },
+                "required": [
+                    "authorized",
+                    "mvpd",
+                    "resource",
+                    "serviceProvider",
+                    "source"
+                ]
             },
             "LogoutResponse": {
                 "type": "object",
@@ -377,7 +425,12 @@
                         "description": "The action to be performed in a user-agent.",
                         "type": "string"
                     }
-                }
+                },
+                "required": [
+                    "actionName",
+                    "actionType",
+                    "mvpd"
+                ]
             },
             "MvpdType": {
                 "type": "object",
@@ -419,40 +472,6 @@
                         "type": "string"
                     },
                     "id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "retrieveVerificationTokenUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "domainName",
-                    "redirectUrl"
-                ]
-            },
-            "createSessionUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "redirectUrl": {
-                        "description": "The final redirect URL to which the user agent navigates when the authentication flow for the MVPD is completed.\n\nThe value must be URL-encoded.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "domainName": {
-                        "description": "The originating domain of the application performing MVPD login.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
-                        "type": "string"
-                    },
-                    "mvpd": {
-                        "description": "The internal unique identifier associated with the Identity Provider during onboarding process.\n\nIf the streaming device platform has limitations in providing a value, then an application will have to resume the authentication session and provide a valid value.",
                         "type": "string"
                     }
                 }
@@ -604,18 +623,14 @@
                         "description": "The action that primary device need to perform in order to complete authentication flow.",
                         "type": "string"
                     }
-                }
-            },
-            "retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request": {
-                "type": "object",
-                "properties": {
-                    "resources": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
+                },
+                "required": [
+                    "actionName",
+                    "actionType",
+                    "reasonType",
+                    "serviceProvider",
+                    "sessionId"
+                ]
             },
             "createPartnerProfileUsingPOST_request": {
                 "type": "object",
@@ -729,6 +744,17 @@
                         "type": "integer"
                     }
                 }
+            },
+            "retrieveAuthorizeDecisionsForMvpdUsingPOST_request": {
+                "type": "object",
+                "properties": {
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     },
@@ -757,13 +783,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST_1",
+                "operationId": "retrieveAuthorizeDecisionsForMvpdUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of decisions with additional information.<summary>",
@@ -778,25 +804,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -920,7 +962,7 @@
         "/{serviceProvider}/logout/{mvpd}": {
             "get": {
                 "summary": "Initiate logout for specific MVPD",
-                "operationId": "getLogoutForMvpdUsingGET_1",
+                "operationId": "getLogoutForMvpdUsingGET",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a list of actions the client must perform in order to complete the logout flow for each deleted profile.<summary>",
@@ -935,31 +977,51 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "302": {
                         "description": "Found. <summary>The response body contains a location redirect to continue the flow until reaching the MVPD login page<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1081,25 +1143,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1175,25 +1253,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "302": {
                         "description": "Found. <summary>The response body contains a location redirect to continue the flow until reaching the MVPD login page<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1248,25 +1342,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1322,7 +1432,7 @@
         "/{serviceProvider}/profiles": {
             "get": {
                 "summary": "Retrieve profiles",
-                "operationId": "getProfilesUsingGET",
+                "operationId": "getProfilesUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains a map of valid profiles, which may be empty.<summary>",
@@ -1337,25 +1447,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1478,25 +1604,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1600,13 +1742,13 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_1_request"
+                                "$ref": "#/components/schemas/retrieveVerificationTokenUsingPOST_request"
                             }
                         }
                     },
                     "required": true
                 },
-                "operationId": "retrieveVerificationTokenUsingPOST_1",
+                "operationId": "retrieveVerificationTokenUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1621,25 +1763,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1743,12 +1901,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
                             }
                         }
                     }
                 },
-                "operationId": "createSessionUsingPOST_1",
+                "operationId": "createSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -1763,25 +1921,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -1886,7 +2060,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_1_request"
+                                "$ref": "#/components/schemas/retrieveAuthorizeDecisionsForMvpdUsingPOST_request"
                             }
                         }
                     },
@@ -1907,25 +2081,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -2053,12 +2243,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/createSessionUsingPOST_1_request"
+                                "$ref": "#/components/schemas/createSessionUsingPOST_request"
                             }
                         }
                     }
                 },
-                "operationId": "resumeSessionUsingPOST_1",
+                "operationId": "resumeSessionUsingPOST",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the next actions to perform authentication.<summary>",
@@ -2073,25 +2263,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -2163,7 +2369,7 @@
             },
             "get": {
                 "summary": "Retrieve authentication session using code",
-                "operationId": "getSessionStatusUsingGET",
+                "operationId": "getSessionStatusUsingGET_1",
                 "responses": {
                     "200": {
                         "description": "OK. <summary>The response body contains information about the authentication session.<summary>",
@@ -2178,25 +2384,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
@@ -2276,25 +2498,41 @@
                     "400": {
                         "description": "Bad request. <summary>The request is invalid, the client needs to correct the request and try again.<summary> <summary>The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "401": {
                         "description": "Unauthorized. <summary>The access token is invalid, the client needs to obtain a new access token and try again. For more details refer to the [Dynamic Client Registration](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/rest-apis/rest-api-dcr/dynamic-client-registration-overview.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error. <summary>The server side encountered an issue. The response body may contain error information that adheres to the [Enhanced Error Codes](https://experienceleague.adobe.com/docs/pass/authentication/integration-guide-programmers/standard-features/error-reporting/enhanced-error-codes.html) documentation.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     },
                     "405": {
                         "description": "Method not allowed. <summary>The HTTP method is invalid, the client needs to use an HTTP method that is permitted for the requested resource and try again. For more details refer to the Request section.<summary>",
                         "content": {
-                            
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorInformation"
+                                }
+                            }
                         }
                     }
                 },
