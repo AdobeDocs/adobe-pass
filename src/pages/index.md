@@ -14,7 +14,7 @@ Important
 
 The content on this page is provided for information purposes only. Usage of this API requires a current license from Adobe. No unauthorized use is permitted.
 
-<Announcement slots="heading, text, button" />
+<Announcement slots="heading, text, button" backgroundColor="background-color-gray"/>
 
 ### Adobe Pass Authentication
 
