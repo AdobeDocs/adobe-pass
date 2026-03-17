@@ -3,12 +3,12 @@ title: Overview - Adobe Pass Authentication
 description: This is the overview page of Adobe Pass Authentication
 ---
 
-<Hero slots="heading, text" />
+<Superhero slots="heading, text" />
 
 # Adobe Pass Authentication
 
 Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining whether someone who requests access to a resource is entitled to it.
-<InlineAlert variant="warning" slots="header, text" />
+<InlineAlert variant="warning" slots="heading, text" />
 
 Important
 

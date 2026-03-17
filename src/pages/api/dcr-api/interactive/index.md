@@ -4,7 +4,7 @@ description: DCR API Spec
 layout: none
 ---
 
-<InlineAlert variant="warning" slots="header, text" />
+<InlineAlert variant="warning" slots="heading, text" />
 
 Important
 
