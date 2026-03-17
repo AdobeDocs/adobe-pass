@@ -20,7 +20,7 @@ The content on this page is provided for information purposes only. Usage of thi
 
 Integrate the new REST API v2 to benefit from the latest Adobe Pass functionalities.
 
-[Try REST API v2](api/rest_api_v2/interactive)
+[Try REST API v2](api/rest-api-v2/interactive/index.md)
 
 <Resources slots="heading, links"></Resources>
 

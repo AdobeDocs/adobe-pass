@@ -23,11 +23,11 @@ module.exports = {
         menu: [
           {
             title: 'DCR API',
-            path: '/api/dcr_api/interactive/index.md'
+            path: '/api/dcr-api/interactive/index.md'
           },
           {
             title: 'REST API V2',
-            path: '/api/rest_api_v2/interactive/index.md'
+            path: '/api/rest-api-v2/interactive/index.md'
           }
         ]
       }
