@@ -3,26 +3,26 @@ title: Overview - Adobe Pass Authentication
 description: This is the overview page of Adobe Pass Authentication
 ---
 
-<Hero slots="heading, text"></Hero>
+<Superhero slots="heading, text" />
 
 # Adobe Pass Authentication
 
 Adobe Pass Authentication is an entitlement solution for TV Everywhere, providing a modular framework for determining whether someone who requests access to a resource is entitled to it.
-<InlineAlert variant="warning" slots="header, text"></InlineAlert>
+<InlineAlert variant="warning" slots="heading, text" />
 
 Important
 
 The content on this page is provided for information purposes only. Usage of this API requires a current license from Adobe. No unauthorized use is permitted.
 
-<AnnouncementBlock slots="heading, text, button"></AnnouncementBlock>
+<Announcement slots="heading, text, button" backgroundColor="background-color-gray"/>
 
 ### Adobe Pass Authentication
 
 Integrate the new REST API v2 to benefit from the latest Adobe Pass functionalities.
 
-[Try REST API v2](api/rest_api_v2/interactive)
+[Try REST API v2](api/rest-api-v2/interactive/index.md)
 
-<Resources slots="heading, links"></Resources>
+<Resources slots="heading, links" />
 
 #### Resources
 
